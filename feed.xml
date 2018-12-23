@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>bitgwang 의 무기고</title>
-  <icon>https://www.gravatar.com/avatar/677a3831b4f8567bbc2750dafb4fa06e</icon>
-  <subtitle>개편중...</subtitle>
+  <icon>https://www.gravatar.com/avatar/b01a31448e399300a64899d7eca81099</icon>
+  <subtitle>차근차근 쌓아가자</subtitle>
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://biggwang.github.io/"/>
@@ -11,7 +11,7 @@
   
   <author>
     <name>Yungwang Ryu</name>
-    <email>beantech@gmail.com</email>
+    <email>ghmryg@gmail.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
