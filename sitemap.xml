@@ -2,17 +2,17 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>http://yoursite-url/post-sitemap.xml</loc>
+        <loc>https://biggwang.github.io/post-sitemap.xml</loc>
         <lastmod>2018-12-11T15:45:43.322Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/page-sitemap.xml</loc>
+        <loc>https://biggwang.github.io/page-sitemap.xml</loc>
         <lastmod>2018-12-03T15:39:05.918Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/tag-sitemap.xml</loc>
+        <loc>https://biggwang.github.io/tag-sitemap.xml</loc>
         <lastmod>2018-12-04T15:37:44.126Z</lastmod>
     </sitemap>
 
