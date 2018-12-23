@@ -148,7 +148,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -162,7 +162,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -229,8 +229,8 @@
 2.exception 발생시 catch 문에서 기존 동작 rollback하고 오류에 대한 insert를 하려 하는데 insert 까지 같이 rollback 됨</p>
 <h2><span id="원인">원인</span></h2>
 <hr>
-<p>1.클래스내 모든 메소드가 private 메소드는 AOP 대상이 아님  <a href="https://goo.gl/rQnG4w" target="_blank" rel="noopener">참고</a><br>
-2.Spring AOP와 소스내 트랜잭션 rollback과 충돌 및 겹침 <a href="https://goo.gl/reS6sF" target="_blank" rel="noopener">참고</a></p>
+<p>1.클래스내 모든 메소드가 private 메소드는 AOP 대상이 아님  <a href="https://goo.gl/rQnG4w" rel="external nofollow noopener noreferrer" target="_blank">참고</a><br>
+2.Spring AOP와 소스내 트랜잭션 rollback과 충돌 및 겹침 <a href="https://goo.gl/reS6sF" rel="external nofollow noopener noreferrer" target="_blank">참고</a></p>
 <h2><span id="해결">해결</span></h2>
 <hr>
 <p>1번 원인만 해결하면 된다면 특정 메소드 public으로 바꿔주면 해결된다. 대신 exception 발생시 무조건 rollback 된다. 정확히 말해서 해당 service단 클래스에서 완전히 throw해주어야 rollback이 된다.</p>
@@ -315,11 +315,11 @@
                 <ul class="list-inline">
 
                     
-                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                        <li><a href="http://beantech.org" target="_blank" rel="external nofollow noopener noreferrer">Bean Tech</a></li>
                     
-                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                        <li><a href="http://blog.kaijun.rocks" target="_blank" rel="external nofollow noopener noreferrer">Kaijun&#39;s Blog</a></li>
                     
-                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                        <li><a href="http://huangxuan.me" target="_blank" rel="external nofollow noopener noreferrer">Hux Blog</a></li>
                     
                         <li><a href="#" target="_blank">It Helps SEO</a></li>
                     
@@ -402,7 +402,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/YenYuHsuan">
+                        <a target="_blank" href="https://www.facebook.com/YenYuHsuan" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -413,7 +413,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/YenYuHsuan">
+                        <a target="_blank" href="https://github.com/YenYuHsuan" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -424,7 +424,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/yu-hsuan-yen">
+                        <a target="_blank" href="https://www.linkedin.com/in/yu-hsuan-yen" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -437,11 +437,11 @@
                 <p class="copyright text-muted">
                     Copyright &copy; Yungwang Ryu 2018 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
@@ -543,10 +543,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://biggwang.github.io/img/icon_wechat.png" width="0" height="0" />
+<img src="https://biggwang.github.io/img/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

@@ -148,7 +148,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -162,7 +162,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -238,7 +238,7 @@
 <img src="/2018/12/05/[quartz]%20실시간%20배치%20동적%20스케줄러%20사용기/post-quartz-clustering-mode-example.png">  
 <h2><span id="그럼-도대체-clustering-기능은-어떻게-사용한단-말인가">그럼 도대체 clustering 기능은 어떻게 사용한단 말인가</span></h2>
 <ul>
-<li>quartz 테이블 생성 <a href="https://goo.gl/HyRE2Q" target="_blank" rel="noopener">[생성 스크립트 이동]</a></li>
+<li>quartz 테이블 생성 <a href="https://goo.gl/HyRE2Q" rel="external nofollow noopener noreferrer" target="_blank">[생성 스크립트 이동]</a></li>
 <li>quartz instance property 설정</li>
 <li>quartz jobStore property 설정  (property 설정 방법은 아래 quartz 설정 방법 부분 참고)</li>
 </ul>
@@ -253,7 +253,7 @@ Can be any string, but must be unique for all schedulers working as if they are 
 </blockquote>
 <p>정리하면 cluster mode를 사용하려면 같은 instanceName을 가진 서버별 고유에 instanceId를 가져야 cluster mode를 이용 할 수 있다는 뜻이다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// scheduler identity</span><br><span class="line">org.quartz.scheduler.instanceName = QUAARTZ-SCHEDULER</span><br><span class="line">org.quartz.scheduler.instanceId = MASTER</span><br><span class="line"></span><br><span class="line">// cluster 관련 설정</span><br><span class="line">org.quartz.jobStore.misfireThreshold = 60000</span><br><span class="line">org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX</span><br><span class="line">org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.MSSQLDelegate</span><br><span class="line">org.quartz.jobStore.dataSource = myDS</span><br><span class="line">org.quartz.jobStore.tablePrefix = QRTZ_</span><br><span class="line">org.quartz.jobStore.isClustered = true</span><br><span class="line">org.quartz.jobStore.clusterCheckinInterval = 1000</span><br></pre></td></tr></table></figure>
-<p>그 밖의 quartz config 설정은 <a href="https://goo.gl/jXEZfS" target="_blank" rel="noopener">quartz 레퍼런스 문서</a>를 보는게 제일 정확하므로 참고하여 설정하면 된다.</p>
+<p>그 밖의 quartz config 설정은 <a href="https://goo.gl/jXEZfS" rel="external nofollow noopener noreferrer" target="_blank">quartz 레퍼런스 문서</a>를 보는게 제일 정확하므로 참고하여 설정하면 된다.</p>
 <h1><span id="quartz-셋팅">Quartz 셋팅</span></h1>
 <h2><span id="프로젝트-환경-및-버전">프로젝트 환경 및 버전</span></h2>
 <p>Java8 + Spring 3.1.1 + Quartz 2.2.1 + Maven</p>
@@ -369,11 +369,11 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
                 <ul class="list-inline">
 
                     
-                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                        <li><a href="http://beantech.org" target="_blank" rel="external nofollow noopener noreferrer">Bean Tech</a></li>
                     
-                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                        <li><a href="http://blog.kaijun.rocks" target="_blank" rel="external nofollow noopener noreferrer">Kaijun&#39;s Blog</a></li>
                     
-                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                        <li><a href="http://huangxuan.me" target="_blank" rel="external nofollow noopener noreferrer">Hux Blog</a></li>
                     
                         <li><a href="#" target="_blank">It Helps SEO</a></li>
                     
@@ -456,7 +456,7 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/YenYuHsuan">
+                        <a target="_blank" href="https://www.facebook.com/YenYuHsuan" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -467,7 +467,7 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/YenYuHsuan">
+                        <a target="_blank" href="https://github.com/YenYuHsuan" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -478,7 +478,7 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
 
                 
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/yu-hsuan-yen">
+                        <a target="_blank" href="https://www.linkedin.com/in/yu-hsuan-yen" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -491,11 +491,11 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
                 <p class="copyright text-muted">
                     Copyright &copy; Yungwang Ryu 2018 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
@@ -597,10 +597,10 @@ cluster mode가 제대로 동작한다면 노란색 박스 로그와 같이 설�
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://biggwang.github.io/img/icon_wechat.png" width="0" height="0" />
+<img src="https://biggwang.github.io/img/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
