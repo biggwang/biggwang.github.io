@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://biggwang.github.io/"/>
-  <updated>2018-12-23T03:34:56.732Z</updated>
+  <updated>2018-12-26T14:52:11.170Z</updated>
   <id>https://biggwang.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>개발자 어떻게 공부 해야 할까</title>
+    <link href="https://biggwang.github.io/2018/12/26/%5Bmeta%5D%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EA%B3%B5%EB%B6%80%20%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/"/>
+    <id>https://biggwang.github.io/2018/12/26/[meta] 개발자 어떻게 공부 해야 할까/</id>
+    <published>2018-12-26T14:41:21.000Z</published>
+    <updated>2018-12-26T14:52:11.170Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="작성-동기">작성 동기</span></h1><p>개발자 어떻게 공부 해야 할까? 그 대답을 찾기위해 고민하고 스스롭 방법을 정립을 머릿속으로만 하였다.<br><strong>“개발자 공부”</strong> 에 대한 선배 개발자님들에 영감을 얻고 내 나름데로 생각을 정리하고 방법을 정립하기 위해 작성해 본다.</p><h1><span id="먼저-영감을준-선배-개발자님들에-조언-정리">먼저 영감을준 선배 개발자님들에 조언 정리</span></h1><h2><span id="개발자의-평생-공부-임백준">개발자의 평생 공부 | 임백준</span></h2><hr><p><a href="https://goo.gl/26K1HE" rel="external nofollow noopener noreferrer" target="_blank">보러가기</a></p><h2><span id="개발자는-어떻게-성장해야-할까-강대명">개발자는 어떻게 성장해야 할까? | 강대명</span></h2><hr><p><a href="https://goo.gl/4fcv6r" rel="external nofollow noopener noreferrer" target="_blank">보러가기</a></p><h3><span id="내가-흥미-있는-주제-위주로-블로그-하기">내가 흥미 있는 주제 위주로 블로그 하기</span></h3><h3><span id="나의-토이-프로젝트-공개하기">나의 토이 프로젝트 공개하기</span></h3><h3><span id="팀에서-사용하지-않는-기술이라면-그럼-나혼자-사용해-봄으로써-기술을-습득하면-된다">팀에서 사용하지 않는 기술이라면 그럼 나혼자 사용해 봄으로써 기술을 습득하면 된다.</span></h3><h3><span id="실력">실력</span></h3><h4><span id="지금-얼마나-알고-있는지">지금 얼마나 알고 있는지</span></h4><h4><span id="얼마나-빨리-배우는지">얼마나 빨리 배우는지</span></h4><h4><span id="지속적으로-학습하는지">지속적으로 학습하는지</span></h4><h3><span id="실력보다-중요한것은">실력보다 중요한것은?</span></h3><h4><span id="커뮤니케이션">커뮤니케이션</span></h4><ul><li>함께 일하고 싶은 동료인가?</li><li>정보 공유를 잘하고 나의 생산성을 향상시켜줄 수 있는 사람</li><li>나중에 우리팀에 함께 일하고자 추천 할 수 있는 사람</li></ul><p>위 질문에 Yes! 라고 주변에서 말할수 있는 상태라면 성실하고 잘하는 개발자이며 나아가 사람들과 잘 소통하고 끌어당기는 힘 개발 그이상에 힘이 있다고 생각한다.</p><h2><span id="오픈소스-개발자-이야기-20170701_오픈소스-개발자의-공부방법강대명">오픈소스 개발자 이야기 20170701_오픈소스 개발자의 공부방법(강대명)</span></h2><hr><p><a href="https://goo.gl/7C17Tw" rel="external nofollow noopener noreferrer" target="_blank">보러가기</a></p><h3><span id="절대적인-노력과-시간은-필요함">절대적인 노력과 시간은 필요함</span></h3><h3><span id="기반지식">기반지식</span></h3><p>강대명 개발자님은 새로운 것을 접할 때 쉬운책을 3~4권 정도 본다든지 어떤 기술을 습득할 때 이 기술이 왜 탄생했는지에 대한 탄생,역사 등을 접한다고 했다.<br>이것은 기반지식을 쌓는 행위라고 생각한다. 예전 부터 나도 기반지식에 대한 의미를 생각 했었는데 누군가의 이야기가 이해 되지 않는 경우는 2가지라고 했다.</p><ul><li>내용자체가 어려운 경우</li><li>기반 지식(컨텍스트)이 부족한 경우</li></ul><p>바로 2번째 경우에서 기반 지식은 곧 이해와 직결되는 사항이라 생각한다.<br>이해라는 전체적인 그림을 그리기 위해서 각 기반 지식들이 퍼즐 조각과도 같은 것이다.<br>따라서 새로운 개념을 습득할 때 기반지식이 없는 상태라면 아래와 같은 행위로 기반지식을 많이 쌓아두면 점점 익숙해져서 더 많이 깨닿고 습득 할 수 있을 거라 생각한다.</p><ul><li>쉬운 개념부터 0부터 100까지 빠르게 습득한다. (예) 기본 서적, 동영상, 블로그 활용)</li><li>탄생, 역사에 대한 히스토리를 보며 탄생의도를 파악한다.</li><li>제일 중요한건 내가 배우고 싶어하는 호기심과 관심이다.</li><li>그 관심을 가지고 토이프로젝트를 하면 최고다.</li><li>그 과정에서 알게되고 적용했을때 즐거움이 좋은 선순환을 만들 것이다.</li></ul><h3><span id="공부-방법에-중요성">공부 방법에 중요성</span></h3><blockquote><p>추가적인 지식습득 없이 특정 방법으로 14%의 수학 성적 향상<br>올바른 방법만 바꿔도 Input 되는 지식없이도 실력이 향상된다는 것이고 이는 프로그래밍에도 적용된다고 한다.<br>나 또한 같은 생각이며 항상 올바른 방법을 추가하며 공부해야 한다고 생각한다.</p></blockquote><h3><span id="의식적인-연습">의식적인 연습</span></h3><h4><span id="스타크래프트-럴커-피하기-연습">스타크래프트 럴커 피하기 연습</span></h4><p>프로게이머는 럴커 피하기 연습을 할 때 촉수가 delay 되는 시간 촉수를 피하기 위해 마우스 포인터 위치를 파악하여 끊임없는 반복 연습을 하여 럴커를 피하게 된다.</p><blockquote><p>의식적 연습이란 럴커를 피하기 위한 의식적 생각에 답으로 delay 시간과 마우스 포인트 위치를 파악하여 집중 노력을 했다는 것이다.<br>프로그래머가 어떠한 새로운 개념,기술,지식을 습득하기 위해선 내가 얻고자 하는 그 무언가를 전략적이고 의식적인 생각을 통해 끊임없이 노력, 제대로 된 노력, 정확 노력을 집중해서 하는 것이라고 생각한다.</p></blockquote><p>관련된 내용에 추천 책</p><ul><li><a href="https://goo.gl/DB6dKW" rel="external nofollow noopener noreferrer" target="_blank">아웃라이어</a></li><li><a href="https://goo.gl/AbmyPJ" rel="external nofollow noopener noreferrer" target="_blank">1만 시간의 재발견</a></li></ul><h3><span id="피드백">피드백</span></h3><p>반드시 필요한 단계이다.<br>투입한 나의 코스트가 낭비되지 않으려면 최대한 빨리 피드백을 받아 나의 상태를 진단하여 무엇이 잘못된지를 파악하여 계획을 다시 잡을 수 있다.</p><blockquote><p>제가 아는 모분은 아는 사람 볼때마다 코드 리뷰 부탁합니다.</p></blockquote><p>정말 개발을 잘하고 싶어하는 의지가 보이는 개발자인거 같다.<br>나도 위와 같은 행동이 정말 필요하다 생각하는데 실천은 잘 안되는거 같다.<br>정말 빨리 배우고 습득하고 싶다면 반드시 필요한 행동이라 생각한다.</p><p>피드백 받는 방법은</p><ul><li>잘하는 선배 개발자에게 질문, 리뷰 요청</li><li>웹상에서 질문</li><li>오픈소스 개발 활동</li></ul><h3><span id="교정">교정</span></h3><p>피드백을 통해 알게 된 내용을 바탕으로 실제 고쳐서 적용하는 것</p><h3><span id="그리고-다시-의식적인-연습">그리고 다시 의식적인 연습</span></h3><p>고쳐진 방법으로 다시 의식적인 연습</p><h2><span id="그래서-나는-어떻게">그래서 나는 어떻게??</span></h2><hr><h3><span id="의식적연습-gt-피드백-gt-교정-gt-의시적연습-반복">의식적연습 -&gt; 피드백 -&gt; 교정 -&gt; 의시적연습 반복</span></h3><p>각 단계에 대한 충실하게 지속적인 실천을 한다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;&lt;span id=&quot;작성-동기&quot;&gt;작성 동기&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;개발자 어떻게 공부 해야 할까? 그 대답을 찾기위해 고민하고 스스롭 방법을 정립을 머릿속으로만 하였다.&lt;br&gt;
+&lt;strong&gt;“개발자 공부”&lt;/strong&gt; 에 대한 선배 개발
+      
+    
+    </summary>
+    
+    
+      <category term="메타" scheme="https://biggwang.github.io/tags/%EB%A9%94%ED%83%80/"/>
+    
+      <category term="개발일반" scheme="https://biggwang.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EB%B0%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>새로운 개념 어떻게 습득해야 할까</title>
     <link href="https://biggwang.github.io/2018/12/12/%5Bmeta%5D%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%EA%B0%9C%EB%85%90%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EC%8A%B5%EB%93%9D%ED%95%B4%EC%95%BC%20%ED%95%A0%EA%B9%8C/"/>
     <id>https://biggwang.github.io/2018/12/12/[meta] 새로운 개념 어떻게 습득해야 할까/</id>
     <published>2018-12-11T15:18:21.000Z</published>
-    <updated>2018-12-23T03:34:56.732Z</updated>
+    <updated>2018-12-26T13:11:54.487Z</updated>
     
     <content type="html"><![CDATA[<h1><span id="새로운-개념-습득-어떻게">새로운 개념 습득 어떻게?</span></h1><p>소프트웨어 개발자로 살고 있는 나는 홍수같이 터져 나오는 많은 기술들에 대해서 다 알아둬야 할 것 같아서 허덕거렸다.<br>이 많은 것을 언제 다 배우지? 그것은 중압감과 압박감으로 스트레스로 이루어 졌고<br>일하면서 알게된 지식들 정리하기도 벅찬데 육아하면서 새로운 개념은 언제 습득 할까…</p><p>하지만 다른 개발들에 생각들을 웹에서 접하면서 새로운 기술을 배우는 것에 초점을 맞추는게 아니라<br>새로운 기술들을 잘 배울려면 나는 어떻게 해야 할까?? 라는 좀 더 근본적인 다시 말해 메타 생각을 가지게 되었다.</p><p>다 배울 필요없고 미리 배울 필요도 없다. 그냥 써야 되는 상황이 오면 그때 습득하여 적용하면 되는 것이다.</p><p>어짜피 미리 배워봤자 머릿속에 장기기억으로 잘 이루어지지 않는다.<br>왜냐하면 설사 습득하였다 하더라도 습득한 기술이<br>정말 절실하고 필요해서 사용한 것이 아니기 때문에 잘 와닿지도 않아 뇌 신경망을 그리 자극시키지 않기 때문이다.</p><p>평소에 쓰는 기술들로 다시 머릿속을 채울뿐이다.</p><p>한마디로 밑빠진독에 물붓기…</p><p>그럼 다시 돌아와서 내가 중요하게 생각하는것은 새로운 개념을 어떻게 해야 빠르고 정확하게 잘 습득하여 적용/응용 할 수 있을까? 라는 대답이다.</p><p>시간 날때마다 생각해본 나의 생각과 참고한 사이트 기반으로 정리한 방법은 아래와 같다. <a href="https://goo.gl/XNsHZv" rel="external nofollow noopener noreferrer" target="_blank">원문</a> / <a href="https://goo.gl/di0BnJ" rel="external nofollow noopener noreferrer" target="_blank">번역</a></p><h1><span id="그래서-어떻게-하라고">그래서 어떻게 하라고?</span></h1><h2><span id="step1-튜토리얼-데로-따라해보자">Step1 튜토리얼 데로 따라해보자</span></h2><h3><span id="익숙해지는게-목표">익숙해지는게 목표</span></h3><ul><li>처음 접한 것이기 때문에 이해라는 그림에 퍼즐조각을 많이 확보해야 함</li><li>퍼즐조각이 많을수록 이해도가 증가함</li><li>모르는것이 천지이기 때문에 모른다고 시간 잡아 먹으면 끝도 없음 일단 끝까지 완주 하는게 목표</li></ul><h2><span id="step2-튜토리얼-따라하면서-몰랐던-내용-조사">Step2 튜토리얼 따라하면서 몰랐던 내용 조사</span></h2><ul><li>Step1 에서 궁금증을 푸는 단계</li><li>삽질은 반드시 필요하며 머릿속에 넣는 고통에 대가이자 필수 재료이다.</li><li>책, 인터넷 서치, 커뮤니티, 지인 질문 등 다양한 방법으로 모르는 것을 해결하자</li></ul><h2><span id="step3-내가-만들고-싶은것을-만들어보자">Step3 내가 만들고 싶은것을 만들어보자</span></h2><ul><li>새로운 것을 습득하려는 이유가 반드시 있을것이다.</li><li>그 이유가 무엇인가??</li><li>그 이유를 바탕으로 내가 만들고 싶은걸 만들어야 동기가 생기고 재밋게 개발할 수 있다.</li></ul><h2><span id="step4-방출하기">Step4 방출하기</span></h2><ul><li>머릿속에 든 내용을 꺼내야 장기기억으로 이어짐</li><li>그 수단은 포스팅, 누군가에게 이해시키기 등이 있다.</li></ul><h1><span id="의식적-연습">의식적 연습</span></h1><p>node.js 기반 스케줄 모듈 만들어 보자</p>]]></content>
     
@@ -37,7 +64,7 @@
     </summary>
     
     
-      <category term="메타능력" scheme="https://biggwang.github.io/tags/%EB%A9%94%ED%83%80%EB%8A%A5%EB%A0%A5/"/>
+      <category term="메타" scheme="https://biggwang.github.io/tags/%EB%A9%94%ED%83%80/"/>
     
   </entry>
   

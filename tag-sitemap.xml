@@ -30,8 +30,15 @@
     </url>
 
     <url>
-        <loc>https://biggwang.github.io/tags/%EB%A9%94%ED%83%80%EB%8A%A5%EB%A0%A5/</loc>
-        <lastmod>2018-12-23T03:34:56.732Z</lastmod>
+        <loc>https://biggwang.github.io/tags/%EB%A9%94%ED%83%80/</loc>
+        <lastmod>2018-12-26T14:52:11.170Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://biggwang.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EB%B0%98/</loc>
+        <lastmod>2018-12-26T14:52:11.170Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
