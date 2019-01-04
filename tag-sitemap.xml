@@ -38,14 +38,21 @@
 
     <url>
         <loc>https://biggwang.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EB%B0%98/</loc>
-        <lastmod>2019-01-04T14:53:54.027Z</lastmod>
+        <lastmod>2019-01-04T14:56:53.559Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://biggwang.github.io/tags/%EB%A9%94%ED%83%80/</loc>
-        <lastmod>2019-01-04T14:53:54.027Z</lastmod>
+        <lastmod>2019-01-04T14:56:53.559Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://biggwang.github.io/tags/Book/</loc>
+        <lastmod>2019-01-04T14:56:53.559Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
