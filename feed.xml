@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>류윤광 개발 무기고</title>
+  <title>백문이불여일견</title>
   <icon>https://www.gravatar.com/avatar/b01a31448e399300a64899d7eca81099</icon>
-  <subtitle>차근차근 쌓아가자</subtitle>
+  <subtitle>어제보다 더 보기 좋고 유연한 코드를 작성하자</subtitle>
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://biggwang.github.io/"/>
