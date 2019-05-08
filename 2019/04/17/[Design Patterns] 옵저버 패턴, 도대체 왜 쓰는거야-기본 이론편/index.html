@@ -16,7 +16,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편 (작성중..) - 류윤광의 개발 블로그
+          옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편 - 류윤광의 개발 블로그
         
     </title>
 
@@ -101,7 +101,7 @@
                               <a class="tag" href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
                             
                         </div>
-                        <h1>옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편 (작성중..)</h1>
+                        <h1>옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편</h1>
                         <h2 class="subheading">옵저버 패턴 파헤치기</h2>
                         <span class="meta">
                             Posted by Yungwang Ryu on
@@ -227,34 +227,44 @@
 <p>한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고</p>
 </blockquote>
 <h3><span id="언제-사용할까">언제 사용할까?</span></h3>
-<h3><span id="내가-만든-예제-구독자에게-미세먼지-전달-하기">내가 만든 예제 (구독자에게 미세먼지 전달 하기)</span></h3>
+<p><strong>내가 만든 예제 (구독자에게 미세먼지 전달 하기)</strong></p>
 <img src="/2019/04/17/[Design%20Patterns]%20옵저버%20패턴,%20도대체%20왜%20쓰는거야-기본%20이론편/observer.png">  
 <p>Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.</p>
 <h3><span id="observer">Observer</span></h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String desertLevel, String desertValue)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이 인터페이스를 구현한(구독한) 구현클래스는 데이터 갱신, 이벤트가 발생하면 update 메소드를 통해 데이터를 받게 된다.</p>
+<p>이 인터페이스를 구현한(구독한) 구현클래스는 데이터 갱신, 이벤트가 발생하면 update 메소드를 통해 데이터를 받게 된다.<br>
+다시 말해 Observer 인터페이스를 구현해야 구독받을수 있다.</p>
 <h3><span id="publisher">Publisher</span></h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Publisher</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Observer를 구현한 구현 클래스에 대한 등록, 삭제, 통지 기능을 명세하기 위해 필요하다.</p>
+<h3><span id="제공-관리자publisher">제공 관리자(Publisher)</span></h3>
+<p>Publisher 인터페이스를 통해 등록, 삭제, 통지 기능을 구현하는 구현 클래스이다.<br>
+인터페이스를 구현하는 것이므로 다양한 비지니스 로직을 넣을 수 있고 실질적으로 클라이언트가 사용하는 클래스이다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewsManager</span> <span class="keyword">implements</span> <span class="title">Publisher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;Observer&gt; observers;</span><br><span class="line">	<span class="keyword">private</span> String desertLevel;</span><br><span class="line">	<span class="keyword">private</span> String desertValue;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">NewsManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.observers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">		observers.add(o);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> index = observers.indexOf(o);</span><br><span class="line">		<span class="keyword">if</span>(index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">			System.out.println(<span class="string">"구독취소"</span>);</span><br><span class="line">			observers.remove(index);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">			observer.update(desertLevel, desertValue);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNewsInfo</span><span class="params">(String desertLevel, String desertValue)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.desertLevel = desertLevel;</span><br><span class="line">		<span class="keyword">this</span>.desertValue = desertValue;</span><br><span class="line">		<span class="keyword">this</span>.notifyObserver();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="구독자-subscriber">구독자 (Subscriber)</span></h3>
+<p>말그데로 구독이다. 특정 이벤트가 발생 할 때 데이터를 받을 수 있다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person1Subscriber</span> <span class="keyword">implements</span> <span class="title">Observer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String desertContents;</span><br><span class="line">	<span class="keyword">private</span> Publisher publisher;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person1Subscriber</span><span class="params">(Publisher publisher)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.publisher = publisher;</span><br><span class="line">		publisher.registerObserver(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String desertLevel, String desertValue)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.desertContents = <span class="string">"오늘의 미세먼지 레벨: "</span> + desertLevel + <span class="string">" | 미세먼지 농도: "</span> + desertValue;</span><br><span class="line">		display();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Person1 구독자님 "</span> + desertContents + <span class="string">" 입니다."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="실행">실행</span></h3>
 <pre><code class="language-java">public static void main(String[] args) {
     NewsManager newsManager = new NewsManager();
-    Person1Subscriber p1 = new Person1Subscriber(newsManager);
+    
+	// 구독신청
+	Person1Subscriber p1 = new Person1Subscriber(newsManager);
     Person2Subscriber p2 = new Person2Subscriber(newsManager);
     Person3Subscriber p3 = new Person3Subscriber(newsManager);
     
+	// 데이터 통지
     newsManager.setNewsInfo(&quot;최악&quot;, &quot;200&quot;);
     newsManager.setNewsInfo(&quot;맑음&quot;, &quot;0.5&quot;);
     
+	// 특정 구독자 해지
     newsManager.removeObserver(p2);
     
+	// 데이터 통지
     newsManager.setNewsInfo(&quot;보통&quot;, &quot;50&quot;);
 	}
 </code></pre>
-<h3><span id="장점은-loose-coupling">장점은? (Loose Coupling)</span></h3>
-<h3><span id="언제-사용-할까">언제 사용 할까?</span></h3>
-
+<img src="/2019/04/17/[Design%20Patterns]%20옵저버%20패턴,%20도대체%20왜%20쓰는거야-기본%20이론편/observer-result.png">
                 
 
                 <hr>
@@ -297,7 +307,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">옵저버 패턴이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">언제 사용할까?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">내가 만든 예제 (구독자에게 미세먼지 전달 하기)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Observer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Publisher</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">장점은? (Loose Coupling)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">언제 사용 할까?</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">옵저버 패턴이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">언제 사용할까?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Observer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Publisher</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">제공 관리자(Publisher)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">구독자 (Subscriber)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">실행</span></a></li></ol>
         
         </div>
       </aside>
