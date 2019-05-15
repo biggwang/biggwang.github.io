@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://biggwang.github.io/"/>
-  <updated>2019-05-08T14:39:16.691Z</updated>
+  <updated>2019-05-15T14:13:36.618Z</updated>
   <id>https://biggwang.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>템플릿 메소드 패턴, 도대체 왜 쓰는거야? - 기본 이론편</title>
+    <link href="https://biggwang.github.io/2019/05/15/%5BDesign%20Patterns%5D%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A9%94%EC%86%8C%EB%93%9C%20%ED%8C%A8%ED%84%B4,%20%EB%8F%84%EB%8C%80%EC%B2%B4%20%EC%99%9C%20%EC%93%B0%EB%8A%94%EA%B1%B0%EC%95%BC-%EA%B8%B0%EB%B3%B8%20%EC%9D%B4%EB%A1%A0%ED%8E%B8/"/>
+    <id>https://biggwang.github.io/2019/05/15/[Design Patterns] 템플릿 메소드 패턴, 도대체 왜 쓰는거야-기본 이론편/</id>
+    <published>2019-05-15T02:36:45.000Z</published>
+    <updated>2019-05-15T14:13:36.618Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="템플릿-메소드-패턴이란">템플릿 메소드 패턴이란?</span></h3><p>메소드 안에 규격화된 로직 또는 단계를 정의해놓고 그 규격화된 단계를 바탕으로 로직을 구현하는 패턴이며 포괄하고 있는 메서드를 템플릿 메서드라 한다.<br>일부 단계에서는 서브클래스에서 입맛에 맞게 로직을 구현하되 전체적인 템플릿(틀, 규격화된 로직)은 그대로 유지된다.</p><h3><span id="언제-사용할까">언제 사용할까?</span></h3><p>예를 들어보자 토니스타크가 아이언맨 슈트를 자동으로 착용하는 장면을 상상해 보자<br>자비스는 토니스타크에게 아래와 같은 순서로 착용해 줄 것이다.</p><blockquote><p>다리 -&gt; 가슴 -&gt; 팔 -&gt; 머리</p></blockquote><p>그렇다 어떤 아이언맨 슈트라도 위 부분 순서데로 장착이 되는 것이다. 그럼 아이언맨 슈트 장착 명령을 자비스에게 내리기 위해 프로그램을 구상해 보자</p><p>순서는 다리, 가슴, 팔, 머리다. 어떤 아이언맨 슈트라도 말이다. 항상 저 순서데로라고 하면 그 순서를 규격화 템플릿화 해놓으면 순서가 꼬일 일도 없지 않을까?? 그리고 아이언맨 슈트별 각 단계에서 이루어지는 설정이 조금씩 다르더라고 그건 서브클래스에서 구현하면 되고 슈트가 장착 되는 순서는 어찌됬든 똑같은 것이다.</p><p>이대목에서 바로 템플릿 메소드 패턴을 사용하는 것이다.</p><p>코드로 구현해 보자</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractAssembl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 바로 여기가 템플릿 메소드이다.</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">void</span> 슈트조립() &#123;</span><br><span class="line">        다리();</span><br><span class="line">        가슴();</span><br><span class="line">        팔();</span><br><span class="line">        머리();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">abstract</span> 머리();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 다리() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 가슴() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 팔() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3><span id="후크">후크</span></h3><p>아이언맨 슈트를 조립하는 템플릿 메소드는 만들었다. 근데 옵션으로 5개의 인피니티 스톤을 장착 할 수 있는 건틀렛을 끼고 싶을때 끼고 끼고 싶지 않을때 빼는 기능을 템플릿 메소드에 추가하려면 어떻게 해야 할까??<br>이부분이 후크가 필요한 기능이다. 아래 코드를 다시 보면 금방 이해가 될 것이다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractAssembl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 바로 여기가 템플릿 메소드이다.</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">void</span> 슈트조립() &#123;</span><br><span class="line">        다리();</span><br><span class="line">        가슴();</span><br><span class="line">        팔();</span><br><span class="line">        머리();</span><br><span class="line">        <span class="keyword">if</span>(인피니티 건틀렛 사용 여부)&#123;</span><br><span class="line">            인피니티 건틀렛();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">abstract</span> 머리();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 다리() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 가슴() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> 팔() &#123;</span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 이부분이 후크이다. 기본적으로 껍데기로 true 처리하고</span></span><br><span class="line">    <span class="comment">// 후크를 사용하려면 서브클래스에서 오버라이드 해야한다.</span></span><br><span class="line">    <span class="keyword">boolean</span> 인피니티 건틀렛 사용 여부()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;템플릿-메소드-패턴이란&quot;&gt;템플릿 메소드 패턴이란?&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;메소드 안에 규격화된 로직 또는 단계를 정의해놓고 그 규격화된 단계를 바탕으로 로직을 구현하는 패턴이며 포괄하고 있는 메서드를 템플릿 메서드라 한다.
+      
+    
+    </summary>
+    
+    
+      <category term="Design Patterns" scheme="https://biggwang.github.io/tags/Design-Patterns/"/>
+    
+  </entry>
   
   <entry>
     <title>REST API에 대해서</title>
