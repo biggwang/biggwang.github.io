@@ -144,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -221,7 +221,7 @@
 
 <div class="post-preview">
 
-    <a href="/2019/07/10/OOP/02 객체 지향 프로그래밍/">
+    <a href="/2019/07/10/OOP/01 객체,설계/">
         <h2 class="post-title">
             01. 객체,설계
         </h2>
@@ -265,7 +265,7 @@
 
 <div class="post-preview">
 
-    <a href="/2019/07/10/OOP/01 객체,설계/">
+    <a href="/2019/07/10/OOP/02 객체 지향 프로그래밍/">
         <h2 class="post-title">
             01. 객체,설계
         </h2>
@@ -435,19 +435,24 @@ SRP(Single Responsibility Principle) 단일 책......
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
         <h2 class="post-title">
-            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
         </h2>
         <h3 class="post-subtitle">
-            팩토리 패턴 파헤치기
+            옵저버 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            왜 팩토리 패턴을 적용했는가?
-스케줄링 되는 배치를 개발 중이었다.
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
-언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
-추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
+            옵저버 패턴이란?
+
+한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
+
+언제 사용할까?
+내가 만든 예제 (구독자에게 미세먼지 전달 하기)
+  
+Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
+Observer
+123public i......
         </div>
     </a>
     
@@ -467,24 +472,19 @@ SRP(Single Responsibility Principle) 단일 책......
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
         <h2 class="post-title">
-            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
+            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
         </h2>
         <h3 class="post-subtitle">
-            옵저버 패턴 파헤치기
+            팩토리 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            옵저버 패턴이란?
-
-한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
-
-언제 사용할까?
-내가 만든 예제 (구독자에게 미세먼지 전달 하기)
-  
-Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
-Observer
-123public i......
+            왜 팩토리 패턴을 적용했는가?
+스케줄링 되는 배치를 개발 중이었다.
+기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
+언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
+추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
         </div>
     </a>
     
@@ -668,11 +668,11 @@ Observer
     <ul>
       
         <li>
-          <a href="/2019/07/10/OOP/02 객체 지향 프로그래밍/">01. 객체,설계</a>
+          <a href="/2019/07/10/OOP/01 객체,설계/">01. 객체,설계</a>
         </li>
       
         <li>
-          <a href="/2019/07/10/OOP/01 객체,설계/">01. 객체,설계</a>
+          <a href="/2019/07/10/OOP/02 객체 지향 프로그래밍/">01. 객체,설계</a>
         </li>
       
         <li>
@@ -700,9 +700,9 @@ Observer
     <div class="tags">
         
             
-        
-            
             <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
+            
+        
             
         
             
@@ -720,15 +720,15 @@ Observer
             
         
             
-        
-            
-        
-            
             <a href="/tags/#개발일반" title="개발일반" rel="2">개발일반</a>
             
         
             
             <a href="/tags/#메타" title="메타" rel="3">메타</a>
+            
+        
+            
+        
             
         
             
