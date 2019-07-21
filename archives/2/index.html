@@ -144,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -446,7 +446,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
+    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
         <h2 class="post-title">
             Spring AOP 적용시 주의사항
         </h2>
@@ -484,23 +484,16 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
+    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
         <h2 class="post-title">
-            Spring AOP 적용시 주의사항
+            Spring Validation 다양한 처리 방법
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            기반개념
-
-1.Componet Scan
-2.Root-context, servlet-context
-3.Spring AOP 방식
-현상
-
-1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨
-2.exception 발생시 catch 문에서......
+            org.springframework.validation 활용
+1234567891011@PostMapping(value = "/leave")public String applyLeave(@ModelAttribute @Valid RequestDto dto,                          Errors erros, RedirectAttribute......
         </div>
     </a>
     
@@ -655,7 +648,17 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
+        
+            
             <a href="/tags/#OOP" title="OOP" rel="3">OOP</a>
+            
+        
+            
+            <a href="/tags/#Framework" title="Framework" rel="2">Framework</a>
+            
+        
+            
+            <a href="/tags/#Spring" title="Spring" rel="2">Spring</a>
             
         
             
@@ -668,16 +671,6 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         
             
             <a href="/tags/#Book" title="Book" rel="3">Book</a>
-            
-        
-            
-            <a href="/tags/#Framework" title="Framework" rel="2">Framework</a>
-            
-        
-            
-            <a href="/tags/#Spring" title="Spring" rel="2">Spring</a>
-            
-        
             
         
             
