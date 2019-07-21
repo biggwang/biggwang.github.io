@@ -144,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -218,6 +218,37 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2019/02/01/회고/2019년도 첫 실천 1월 회고/">
+        <h2 class="post-title">
+            2019년도 첫 실천 1월 회고
+        </h2>
+        <h3 class="post-subtitle">
+            1월 실천 성적표
+        </h3>
+        <div class="post-content-preview">
+            1월 실천 성적표
+  
+드디어 2019년도! 나의 실천 1월 첫 성적표이다.  깃텁 TIL 에서 작성한 하루 해야 할 체크리스트 수행 함에 따라 하루 점수를 매겨 100점 만점으로 환산하여 나타낸것이다.  (Github에 contribution을 따라해봤다.)
+일단 위 색깔 음영과 같이 대부분 해야할 것을 미루지 않고 실천하였다.  정말 하기 싫은날에......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-02-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#회고" title="회고">회고</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -446,23 +477,16 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
+    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
         <h2 class="post-title">
-            Spring AOP 적용시 주의사항
+            Spring Validation 다양한 처리 방법
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            기반개념
-
-1.Componet Scan
-2.Root-context, servlet-context
-3.Spring AOP 방식
-현상
-
-1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨
-2.exception 발생시 catch 문에서......
+            org.springframework.validation 활용
+1234567891011@PostMapping(value = "/leave")public String applyLeave(@ModelAttribute @Valid RequestDto dto,                          Errors erros, RedirectAttribute......
         </div>
     </a>
     
@@ -484,16 +508,23 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
+    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
         <h2 class="post-title">
-            Spring Validation 다양한 처리 방법
+            Spring AOP 적용시 주의사항
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            org.springframework.validation 활용
-1234567891011@PostMapping(value = "/leave")public String applyLeave(@ModelAttribute @Valid RequestDto dto,                          Errors erros, RedirectAttribute......
+            기반개념
+
+1.Componet Scan
+2.Root-context, servlet-context
+3.Spring AOP 방식
+현상
+
+1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨
+2.exception 발생시 catch 문에서......
         </div>
     </a>
     
@@ -614,15 +645,15 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         </li>
       
         <li>
+          <a href="/2019/07/10/JPA/N+1 문제 해결 방법/">N+1 문제 해결 방법</a>
+        </li>
+      
+        <li>
           <a href="/2019/06/28/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-기본 이론편/">팩토리 패턴, 도대체 왜 쓰는거야? - 기본 이론편</a>
         </li>
       
         <li>
           <a href="/2019/05/23/OOP/객체 지향 설계 5대 원칙/">객체 지향 설계 5대 원칙 - SOLID</a>
-        </li>
-      
-        <li>
-          <a href="/2019/05/15/Design Patterns/[Design Patterns] 템플릿 메소드 패턴, 도대체 왜 쓰는거야-기본 이론편/">템플릿 메소드 패턴, 도대체 왜 쓰는거야? - 기본 이론편</a>
         </li>
       
     </ul>
@@ -640,11 +671,11 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
-            
-        
-            
-        
             
         
             
@@ -654,11 +685,17 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
+        
+            
             <a href="/tags/#Framework" title="Framework" rel="2">Framework</a>
             
         
             
             <a href="/tags/#Spring" title="Spring" rel="2">Spring</a>
+            
+        
+            
+            <a href="/tags/#회고" title="회고" rel="3">회고</a>
             
         
             
@@ -673,10 +710,6 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             <a href="/tags/#Book" title="Book" rel="3">Book</a>
             
         
-            
-            <a href="/tags/#회고" title="회고" rel="3">회고</a>
-            
-        
     </div>
 </section>
 
@@ -685,7 +718,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
