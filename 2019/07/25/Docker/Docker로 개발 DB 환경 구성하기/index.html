@@ -16,11 +16,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Spring AOP 적용시 주의사항 - 류윤광의 개발 블로그
+          Docker로 개발 DB 환경 구성하기 - 류윤광의 개발 블로그
         
     </title>
 
-    <link rel="canonical" href="https://biggwang.github.io/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
+    <link rel="canonical" href="https://biggwang.github.io/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -41,7 +41,7 @@
 
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumbrushscript.css"> -->
 
-    <link rel="canonical" href="https://biggwang.github.io/2018/12/04/spring/spring aop 적용시 주의사항/">
+    <link rel="canonical" href="https://biggwang.github.io/2019/07/25/docker/docker로 개발 db 환경 구성하기/">
 
 
 
@@ -98,16 +98,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Framework" title="Framework">Framework</a>
-                            
-                              <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                              <a class="tag" href="/tags/#Learnning" title="Learnning">Learnning</a>
                             
                         </div>
-                        <h1>Spring AOP 적용시 주의사항</h1>
+                        <h1>Docker로 개발 DB 환경 구성하기</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Yungwang Ryu on
-                            2018-12-04
+                            2019-07-25
                         </span>
                     </div>
                 
@@ -224,29 +222,78 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="기반개념">기반개념</span></h2>
-<hr>
-<p>1.Componet Scan<br>
-2.Root-context, servlet-context<br>
-3.Spring AOP 방식</p>
-<h2><span id="현상">현상</span></h2>
-<hr>
-<p>1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨<br>
-2.exception 발생시 catch 문에서 기존 동작 rollback하고 오류에 대한 insert를 하려 하는데 insert 까지 같이 rollback 됨</p>
-<h2><span id="원인">원인</span></h2>
-<hr>
-<p>1.클래스내 모든 메소드가 private 메소드는 AOP 대상이 아님  <a href="https://goo.gl/rQnG4w" rel="external nofollow noopener noreferrer" target="_blank">참고</a><br>
-2.Spring AOP와 소스내 트랜잭션 rollback과 충돌 및 겹침 <a href="https://goo.gl/reS6sF" rel="external nofollow noopener noreferrer" target="_blank">참고</a></p>
-<h2><span id="해결">해결</span></h2>
-<hr>
-<p>1번 원인만 해결하면 된다면 특정 메소드 public으로 바꿔주면 해결된다. 대신 exception 발생시 무조건 rollback 된다. 정확히 말해서 해당 service단 클래스에서 완전히 throw해주어야 rollback이 된다.</p>
-<p>하지만 특정시점까지만 rollback 하고 그다움부턴 정상 commit 하고 싶은경우도 분명히 존재한다. 현상 2처럼 말이다. 그럴땐 Spring AOP 방식을 적용하지 않게 해야 한다. 안그러면 원인 2 처럼 되어 모두 rollback 이 되어 버린다.</p>
-<p>따라서 원인 2를 해결하려면 모두 메소드를 private으로 바꾸고 소스내에서 commit / rollback 을 수행하면 된다.</p>
-<h2><span id="코드">코드</span></h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">*** 생략</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (Map&lt;String, Object&gt; map : mBatchList) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 서비스별 dataSource 정보 갱신</span></span><br><span class="line">  bds = mDbConnMng.reNewDataSource(map.get(<span class="string">"driver"</span>).toString(), map.get(<span class="string">"url"</span>).toString(),map.get(<span class="string">"username"</span>).toString(),map.get(<span class="string">"password"</span>).toString());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// session open</span></span><br><span class="line">  session = mDbConnMng.openSession(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// mapper 호출</span></span><br><span class="line">  dao = session.getMapper(TransDataDao.class);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ###### case 1 ######</span></span><br><span class="line">  <span class="comment">/***************************************************************</span></span><br><span class="line"><span class="comment">  // 해당 클래스 메소드 모두 private --&gt; update 정상 동작</span></span><br><span class="line"><span class="comment">  // 해당 클래스 메소드 한개 이상 public --&gt; update 도 rollback 됨</span></span><br><span class="line"><span class="comment">  // 정리하면</span></span><br><span class="line"><span class="comment">  // Spring AOP Transaction 걸었는데 메소드내 트랜잭션 가져오면 충돌 나서 함수단위로 rollback이 안됨..</span></span><br><span class="line"><span class="comment">  // 메소드내 트랜잭션 가져오려면 해당 클래스내 메소드를 모두 private로 해야 함..</span></span><br><span class="line"><span class="comment">  // 반대로 Spring AOP Transaction 걸려면 public 메소드가 한개라도 있어야 함</span></span><br><span class="line"><span class="comment">  ***************************************************************/</span></span><br><span class="line"></span><br><span class="line">  insertFirstData();</span><br><span class="line">  session.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">insertFirstData</span> <span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ##### case 4 ###### worker 메소드 private으로 바꿈 (모든 메소드 private 이어야 함)</span></span><br><span class="line">  DefaultTransactionDefinition def = <span class="keyword">new</span> DefaultTransactionDefinition();</span><br><span class="line">  def.setName(<span class="string">"insert tx"</span>);</span><br><span class="line">  def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);</span><br><span class="line">  TransactionStatus status = iCalDbConnection.getTransaction(def);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> result = loadDataDao.insertData();</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> Exception();</span><br><span class="line">    &#125;</span><br><span class="line">    iCalDbConnection.commit(status);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    iCalDbConnection.rollback(status);</span><br><span class="line">    updateTest();</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result = loadDataDao.updateTest();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// console log</span></span><br><span class="line"><span class="number">13</span>:<span class="number">49</span>:<span class="number">50</span> INFO &#123;<span class="function">call <span class="title">SET_CAL_BISMALLLITE_INSERT</span><span class="params">()</span> &#125; <span class="comment">// rollback 대상</span></span></span><br><span class="line"><span class="function">13:49:50 INFO |-------|</span></span><br><span class="line"><span class="function">13:49:50 INFO |RESULT |</span></span><br><span class="line"><span class="function">13:49:50 INFO |-------|</span></span><br><span class="line"><span class="function">13:49:50 INFO |1 |</span></span><br><span class="line"><span class="function">13:49:50 INFO |-------|</span></span><br><span class="line"><span class="function">13:49:52 INFO </span>&#123;<span class="function">call <span class="title">SP_SET_BATCH_LOG_UPDATE</span><span class="params">(<span class="string">'F'</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="string">'N'</span>, <span class="string">'ERR_CD!!!'</span>, <span class="string">'ERROR 발생!!!!!!!'</span>)</span> &#125;  <span class="comment">// insert/update 대상</span></span></span><br><span class="line"><span class="function">13:49:52 INFO |-------|</span></span><br><span class="line"><span class="function">13:49:52 INFO |result |</span></span><br><span class="line"><span class="function">13:49:52 INFO |-------|</span></span><br><span class="line"><span class="function">13:49:52 INFO |1 |</span></span><br><span class="line"><span class="function">13:49:52 INFO |-------|</span></span><br></pre></td></tr></table></figure>
-<h2><span id="공부해야-할-개념">공부해야 할 개념</span></h2>
-<hr>
-<p>1.Spring AOP 동작 방식</p>
+                <h1><span id="docker로-난-무얼-하고-싶었나">Docker로 난 무얼 하고 싶었나??</span></h1>
+<p>환경에 제약 없이 개발 DB를 구성하고 싶었다.<br>
+맥북에서 공부한 내용을 실습하면서 개발하고 개발한 소스 Github에 올리고 집에서는 Github에서 소스를 받아서 하면됬다.<br>
+근데, DB는?? 내가 저장한 데이터 DB 컨텍스트 정보는 환경이 바뀌면 매번 설치하고 데이터 싱크 맞추기 위해 쿼리 만들고 스크립트 돌려야 하나?  게다가 집은 Window PC이다… 개발하기도 전에 환경 구성하는 것 때문에 지친다…</p>
+<p>그러다 문득 Docker! Docker로 이미지 만들고 Docker Hub 에 올려 놓으면 그 짜증나는 환경 구성이 해결 되지 않을까??<br>
+Docker를 왜 쓸까? 했는데 나에게 Docker가 필요해진 경우가 생긴 것이다.</p>
+<h1><span id="docker-기본-명령어">Docker 기본 명령어</span></h1>
+<p>우선 Docker를 다루면서 자주 사용하는 기본 명령어를 정리하였습니다.<br>
+이미지를 만들고 그 이미지를 run 하여 컨테이너를 만들고 하는 작업은 반드시 하는 작업이기 때문에 정리합니다.</p>
+<p>이미지 보기</p>
+<blockquote>
+<p>docker images</p>
+</blockquote>
+<p>이미지 실행</p>
+<blockquote>
+<p>docker run imageID</p>
+</blockquote>
+<p>이미지 삭제</p>
+<blockquote>
+<p>docker rmi imageID</p>
+</blockquote>
+<p>컨테이너 보기</p>
+<blockquote>
+<p>docker ps<br>
+docker ps -a</p>
+</blockquote>
+<p>컨테이너 실행</p>
+<blockquote>
+<p>docker start containerID</p>
+</blockquote>
+<p>컨테이너 중지</p>
+<blockquote>
+<p>docker stop containerID</p>
+</blockquote>
+<p>컨테이너 삭제</p>
+<blockquote>
+<p>docker rm continerID</p>
+</blockquote>
+<h1><span id="mysql-셋팅">MySql 셋팅</span></h1>
+<p>이미지 다운로드</p>
+<blockquote>
+<p>docker pull mysql:5.7</p>
+</blockquote>
+<p>MySql 컨테이너 생성 및 실행</p>
+<blockquote>
+<p>docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1111 --name ryu mysql:5.7</p>
+</blockquote>
+<p>MySql 컨테이너 bash 쉘 접속</p>
+<blockquote>
+<p>docker exec -i -t jayden-mysql bash</p>
+</blockquote>
+<h1><span id="docker-hub-관련-명령어">Docker Hub 관련 명령어</span></h1>
+<p>내가 작업한 MySql 컨테이너를 Docker Hub에 반영한다.</p>
+<blockquote>
+<p>docker commmit container_name image_name</p>
+</blockquote>
+<p>Docker Hub 접속</p>
+<blockquote>
+<p>docker login</p>
+</blockquote>
+<p>docker user id 환경 변수 지정</p>
+<blockquote>
+<p>$ export DOCKER_ID_USER=“nicewoong”</p>
+</blockquote>
+<p>Docker Image 태그</p>
+<blockquote>
+<p>docker tag ubuntu-cpp-driver $DOCKER_ID_USER/ubuntu-cpp-driver</p>
+</blockquote>
+<p>Docker Hub에 반영</p>
+<blockquote>
+<p>docker push $DOCKER_ID_USER/ubuntu-cpp-driver</p>
+</blockquote>
 
                 
 
@@ -255,12 +302,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/12/05/ETC/[quartz] 실시간 배치 동적 스케줄러 사용기/" data-toggle="tooltip" data-placement="top" title="Quartz를 활용한 실시간 배치 동적 스케줄러 사용기">&larr; Previous Post</a>
+                            <a href="/2019/07/25/JPA/JPA 커스텀 리파지토리 만드는 방법/" data-toggle="tooltip" data-placement="top" title="JPA 커스텀 리파지토리 만드는 방법">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2018/12/04/Spring/Spring Validation 처리 방법/" data-toggle="tooltip" data-placement="top" title="Spring Validation 다양한 처리 방법">Next Post &rarr;</a>
+                            <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/" data-toggle="tooltip" data-placement="top" title="Spock 으로 Controller 파일 업로드 테스트 해보기">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -290,7 +337,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">기반개념</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">현상</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">원인</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">해결</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">코드</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">공부해야 할 개념</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Docker로 난 무얼 하고 싶었나??</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Docker 기본 명령어</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">MySql 셋팅</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Docker Hub 관련 명령어</span></a></li></ol>
         
         </div>
       </aside>
@@ -310,9 +357,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Framework" title="Framework">Framework</a>
-                        
-                          <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                          <a class="tag" href="/tags/#Learnning" title="Learnning">Learnning</a>
                         
                     </div>
                 </section>
@@ -332,8 +377,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "Yungwang";
-    var disqus_identifier = "https://biggwang.github.io/2018/12/04/Spring/Spring AOP 적용시 주의사항/";
-    var disqus_url = "https://biggwang.github.io/2018/12/04/Spring/Spring AOP 적용시 주의사항/";
+    var disqus_identifier = "https://biggwang.github.io/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/";
+    var disqus_url = "https://biggwang.github.io/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

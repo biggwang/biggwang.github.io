@@ -221,29 +221,27 @@
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
+    <a href="/2019/05/08/API/[REST API] REST API란/">
         <h2 class="post-title">
-            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+            REST API에 대해서
         </h2>
         <h3 class="post-subtitle">
-            팩토리 패턴 파헤치기
+            
         </h3>
         <div class="post-content-preview">
-            왜 팩토리 패턴을 적용했는가?
-스케줄링 되는 배치를 개발 중이었다.
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
-언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
-추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
+            REST API
+내가 이해한 바탕으로 나만의 언어로 해석하자면 API 만 봐도 Client입장에서 정보를 이해 할 수 있고 활용 할 수 있어야 한다는 것이다.
+즉, 클라이언트가 웹이든 앱이든 그 외 수단이든  Fielding이 말하는 REST 아키텍처를 따른 API 는 API 그 자체만으로도 충분히 판단, 활용 가능한 정보이므로 서버, 다양한 클라이언......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by Yungwang Ryu on
-            2019-04-17
+            2019-05-08
         </p>
         <div class="tags">
             
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+              <a href="/tags/#API" title="API">API</a>
             
         </div>
     
@@ -271,6 +269,38 @@
 Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
 Observer
 123public i......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-04-17
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
+        <h2 class="post-title">
+            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+        </h2>
+        <h3 class="post-subtitle">
+            팩토리 패턴 파헤치기
+        </h3>
+        <div class="post-content-preview">
+            왜 팩토리 패턴을 적용했는가?
+스케줄링 되는 배치를 개발 중이었다.
+기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
+언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
+추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
         </div>
     </a>
     
@@ -550,42 +580,6 @@ Observer
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/12/05/ETC/[quartz] 실시간 배치 동적 스케줄러 사용기/">
-        <h2 class="post-title">
-            Quartz를 활용한 실시간 배치 동적 스케줄러 사용기
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            어떤 시스템인가
-
-DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재하는 스케줄러 배치 모듈
-서버 중단 없이 스케줄 주기 동적 변경
-서버 중단 없이 이관 DB 추가 하여 스케줄 배치 수행
-이관해야 하는 DB 접속수가 늘어나도 각각 스케쥴 배치 수행
-기본적 서버 이중화 이지만 서버가 늘어나도 서버별 스케줄 배치 수행 (서버 클러스터링)......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yungwang Ryu on
-            2018-12-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Library" title="Library">Library</a>
-            
-              <a href="/tags/#Quartz" title="Quartz">Quartz</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -687,6 +681,10 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         </li>
       
         <li>
+          <a href="/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/">Docker로 개발 DB 환경 구성하기</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/">Spock 으로 Controller 파일 업로드 테스트 해보기</a>
         </li>
       
@@ -696,10 +694,6 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
       
         <li>
           <a href="/2019/07/11/OOP/Object 책 정리/02 객체 지향 프로그래밍/">02. 객체 지향 프로그래밍</a>
-        </li>
-      
-        <li>
-          <a href="/2019/07/10/JPA/JPA N+1 문제 해결 방법/">N+1 문제 해결 방법</a>
         </li>
       
     </ul>
@@ -757,7 +751,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
-            <a href="/tags/#Learnning" title="Learnning" rel="3">Learnning</a>
+            <a href="/tags/#Learnning" title="Learnning" rel="4">Learnning</a>
             
         
             
@@ -770,7 +764,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
