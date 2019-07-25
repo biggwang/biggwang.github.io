@@ -257,6 +257,41 @@ Hibernate, Spring Data 제공하는 기능 외 내가 필요한......
 
 <div class="post-preview">
 
+    <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/">
+        <h2 class="post-title">
+            Spock 으로 Controller 파일 업로드 테스트 해보기
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            들어가며
+Junit 으로만 사용하다가 BDD에 특화된 테스트 프레임워크인 Spock을 팀내 테스트 코드에 공식 툴?로 정하게 되어서 Spock에 얼른 익숙해지기 위해 경험했던 내용을 공유합니다.
+도전
+Controller에서 파일 업로드 테스트를 합니다.
+테스트 케이스는
+
+자기소개 텍스트 길이는 10자 이내여야 합니다.
+자기소개 이미지 있을때 없을때 경......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-07-25
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Experience" title="Experience">Experience</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/07/23/JPA/JPA 쿼리에 대해서/">
         <h2 class="post-title">
             JPA 쿼리에 대해서
@@ -329,6 +364,44 @@ JPA를 공부하면서 가장 큰 착각 중에 하나였다.
 
 <div class="post-preview">
 
+    <a href="/2019/07/10/JPA/JPA N+1 문제 해결 방법/">
+        <h2 class="post-title">
+            N+1 문제 해결 방법
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            예제 Repository
+류윤광 Github
+학습목표
+
+N+1 문제가 무엇인지 안다.
+그것을 해결하기 위한 방법이 어떤것이 있으면 각 방법에 장단점을 안다.
+실무에 정확히 적용 할 줄 안다.
+
+우선 junit에 테스트 한다면 아래 사항을 주의 하자
+
+junit은 기본적으로 테스트가 끝나면 rollback 되므로 그 영향으로 JPA에 영속성 컨텍스트에서......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-07-10
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Learnning" title="Learnning">Learnning</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/07/10/OOP/Object 책 정리/01 객체,설계/">
         <h2 class="post-title">
             01. 객체,설계
@@ -364,44 +437,6 @@ JPA를 공부하면서 가장 큰 착각 중에 하나였다.
               <a href="/tags/#OOP" title="OOP">OOP</a>
             
               <a href="/tags/#Book" title="Book">Book</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/07/10/JPA/JPA N+1 문제 해결 방법/">
-        <h2 class="post-title">
-            N+1 문제 해결 방법
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            예제 Repository
-류윤광 Github
-학습목표
-
-N+1 문제가 무엇인지 안다.
-그것을 해결하기 위한 방법이 어떤것이 있으면 각 방법에 장단점을 안다.
-실무에 정확히 적용 할 줄 안다.
-
-우선 junit에 테스트 한다면 아래 사항을 주의 하자
-
-junit은 기본적으로 테스트가 끝나면 rollback 되므로 그 영향으로 JPA에 영속성 컨텍스트에서......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yungwang Ryu on
-            2019-07-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Learnning" title="Learnning">Learnning</a>
             
         </div>
     
@@ -535,38 +570,6 @@ SRP(Single Responsibility Principle) 단일 책......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
-        <h2 class="post-title">
-            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
-        </h2>
-        <h3 class="post-subtitle">
-            팩토리 패턴 파헤치기
-        </h3>
-        <div class="post-content-preview">
-            왜 팩토리 패턴을 적용했는가?
-스케줄링 되는 배치를 개발 중이었다.
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
-언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
-추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yungwang Ryu on
-            2019-04-17
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Design Patterns" title="Design Patterns">Design Patterns</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -664,15 +667,15 @@ SRP(Single Responsibility Principle) 단일 책......
         </li>
       
         <li>
+          <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/">Spock 으로 Controller 파일 업로드 테스트 해보기</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/23/JPA/JPA 쿼리에 대해서/">JPA 쿼리에 대해서</a>
         </li>
       
         <li>
           <a href="/2019/07/11/OOP/Object 책 정리/02 객체 지향 프로그래밍/">02. 객체 지향 프로그래밍</a>
-        </li>
-      
-        <li>
-          <a href="/2019/07/10/OOP/Object 책 정리/01 객체,설계/">01. 객체,설계</a>
         </li>
       
         <li>
@@ -737,6 +740,8 @@ SRP(Single Responsibility Principle) 단일 책......
             <a href="/tags/#Learnning" title="Learnning" rel="3">Learnning</a>
             
         
+            
+        
     </div>
 </section>
 
@@ -745,7 +750,7 @@ SRP(Single Responsibility Principle) 단일 책......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
