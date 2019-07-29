@@ -221,6 +221,37 @@
 
 <div class="post-preview">
 
+    <a href="/2019/05/23/OOP/객체 지향 설계 5대 원칙/">
+        <h2 class="post-title">
+            객체 지향 설계 5대 원칙 - SOLID
+        </h2>
+        <h3 class="post-subtitle">
+            OOP를 올바르게 설계 하는 방법
+        </h3>
+        <div class="post-content-preview">
+            SOLID 란?
+객체지향이 탄생이후 50년 동안 수많은 시행착오 속에 태어난 5가지 원칙을 Robert C. Martin 이 2000년대 초반 객체 지향 프로그래밍 및 설계의 다섯 가지 기본 원칙으로 제시한 것을 Michael Feathers 가 앞글자만 따서 소개한 것이다.
+
+SRP(Single Responsibility Principle) 단일 책......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-05-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#OOP" title="OOP">OOP</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/05/15/Design Patterns/[Design Patterns] 템플릿 메소드 패턴, 도대체 왜 쓰는거야-기본 이론편/">
         <h2 class="post-title">
             템플릿 메소드 패턴, 도대체 왜 쓰는거야? - 기본 이론편
@@ -283,24 +314,19 @@
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
         <h2 class="post-title">
-            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
+            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
         </h2>
         <h3 class="post-subtitle">
-            옵저버 패턴 파헤치기
+            팩토리 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            옵저버 패턴이란?
-
-한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
-
-언제 사용할까?
-내가 만든 예제 (구독자에게 미세먼지 전달 하기)
-  
-Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
-Observer
-123public i......
+            왜 팩토리 패턴을 적용했는가?
+스케줄링 되는 배치를 개발 중이었다.
+기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
+언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
+추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
         </div>
     </a>
     
@@ -320,19 +346,24 @@ Observer
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
         <h2 class="post-title">
-            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
         </h2>
         <h3 class="post-subtitle">
-            팩토리 패턴 파헤치기
+            옵저버 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            왜 팩토리 패턴을 적용했는가?
-스케줄링 되는 배치를 개발 중이었다.
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
-언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
-추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
+            옵저버 패턴이란?
+
+한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
+
+언제 사용할까?
+내가 만든 예제 (구독자에게 미세먼지 전달 하기)
+  
+Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
+Observer
+123public i......
         </div>
     </a>
     
@@ -543,43 +574,6 @@ Observer
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/12/26/메타인지/[meta] 개발자 어떻게 공부 해야 할까/">
-        <h2 class="post-title">
-            개발자 어떻게 공부 해야 할까
-        </h2>
-        <h3 class="post-subtitle">
-            선배 개발자님들에 조언 정리와 나의 생각
-        </h3>
-        <div class="post-content-preview">
-            작성 동기
-개발자 어떻게 공부 해야 할까? 그 대답을 찾기위해 고민하고 스스롭 방법을 정립을 머릿속으로만 하였다.
-“개발자 공부” 에 대한 선배 개발자님들에 영감을 얻고 내 나름데로 생각을 정리하고 방법을 정립하기 위해 작성해 본다.
-먼저 영감을준 선배 개발자님들에 조언 정리
-개발자의 평생 공부 | 임백준
-
-보러가기
-개발자는 어떻게 성장해야 할까? |......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yungwang Ryu on
-            2018-12-26
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#개발일반" title="개발일반">개발일반</a>
-            
-              <a href="/tags/#메타" title="메타">메타</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -677,6 +671,10 @@ Observer
     <ul>
       
         <li>
+          <a href="/2019/07/29/OOP/Object 책 정리/객체 설계 할 때 데이터 중심이 아닌 책임 중심으로 해야 하는 이유/">객체 설계 할 때 데이터 중심이 아닌 책임 중심으로 해야 하는 이유</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/27/JPA/JPA 영속성 컨텍스트 엔티티 관리 방법/">JPA 영속성 컨텍스트 엔티티 관리 방법</a>
         </li>
       
@@ -690,10 +688,6 @@ Observer
       
         <li>
           <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/">Spock 으로 Controller 파일 업로드 테스트 해보기</a>
-        </li>
-      
-        <li>
-          <a href="/2019/07/23/JPA/JPA 쿼리에 대해서/">JPA 쿼리에 대해서</a>
         </li>
       
     </ul>
@@ -721,7 +715,7 @@ Observer
             
         
             
-            <a href="/tags/#OOP" title="OOP" rel="3">OOP</a>
+            <a href="/tags/#OOP" title="OOP" rel="4">OOP</a>
             
         
             
@@ -741,7 +735,7 @@ Observer
             
         
             
-            <a href="/tags/#Book" title="Book" rel="3">Book</a>
+            <a href="/tags/#Book" title="Book" rel="4">Book</a>
             
         
             
@@ -764,7 +758,7 @@ Observer
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>

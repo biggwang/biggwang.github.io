@@ -221,6 +221,43 @@
 
 <div class="post-preview">
 
+    <a href="/2018/12/26/메타인지/[meta] 개발자 어떻게 공부 해야 할까/">
+        <h2 class="post-title">
+            개발자 어떻게 공부 해야 할까
+        </h2>
+        <h3 class="post-subtitle">
+            선배 개발자님들에 조언 정리와 나의 생각
+        </h3>
+        <div class="post-content-preview">
+            작성 동기
+개발자 어떻게 공부 해야 할까? 그 대답을 찾기위해 고민하고 스스롭 방법을 정립을 머릿속으로만 하였다.
+“개발자 공부” 에 대한 선배 개발자님들에 영감을 얻고 내 나름데로 생각을 정리하고 방법을 정립하기 위해 작성해 본다.
+먼저 영감을준 선배 개발자님들에 조언 정리
+개발자의 평생 공부 | 임백준
+
+보러가기
+개발자는 어떻게 성장해야 할까? |......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2018-12-26
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#개발일반" title="개발일반">개발일반</a>
+            
+              <a href="/tags/#메타" title="메타">메타</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/12/12/메타인지/[meta] 새로운 개념 어떻게 습득해야 할까/">
         <h2 class="post-title">
             새로운 개념 어떻게 습득해야 할까
@@ -289,16 +326,23 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
+    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
         <h2 class="post-title">
-            Spring Validation 다양한 처리 방법
+            Spring AOP 적용시 주의사항
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            org.springframework.validation 활용
-1234567891011@PostMapping(value = "/leave")public String applyLeave(@ModelAttribute @Valid RequestDto dto,                          Errors erros, RedirectAttribute......
+            기반개념
+
+1.Componet Scan
+2.Root-context, servlet-context
+3.Spring AOP 방식
+현상
+
+1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨
+2.exception 발생시 catch 문에서......
         </div>
     </a>
     
@@ -320,23 +364,16 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
 
 <div class="post-preview">
 
-    <a href="/2018/12/04/Spring/Spring AOP 적용시 주의사항/">
+    <a href="/2018/12/04/Spring/Spring Validation 처리 방법/">
         <h2 class="post-title">
-            Spring AOP 적용시 주의사항
+            Spring Validation 다양한 처리 방법
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            기반개념
-
-1.Componet Scan
-2.Root-context, servlet-context
-3.Spring AOP 방식
-현상
-
-1.point cut excution 패턴 적용 하였지만 특정 패키지에서만 동작이 되고 Scheduled 사용된 클래스에서는 AOP 적용, 즉 트랜잭션 rollback이 안됨
-2.exception 발생시 catch 문에서......
+            org.springframework.validation 활용
+1234567891011@PostMapping(value = "/leave")public String applyLeave(@ModelAttribute @Valid RequestDto dto,                          Errors erros, RedirectAttribute......
         </div>
     </a>
     
@@ -449,6 +486,10 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
     <ul>
       
         <li>
+          <a href="/2019/07/29/OOP/Object 책 정리/객체 설계 할 때 데이터 중심이 아닌 책임 중심으로 해야 하는 이유/">객체 설계 할 때 데이터 중심이 아닌 책임 중심으로 해야 하는 이유</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/27/JPA/JPA 영속성 컨텍스트 엔티티 관리 방법/">JPA 영속성 컨텍스트 엔티티 관리 방법</a>
         </li>
       
@@ -462,10 +503,6 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
       
         <li>
           <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/">Spock 으로 Controller 파일 업로드 테스트 해보기</a>
-        </li>
-      
-        <li>
-          <a href="/2019/07/23/JPA/JPA 쿼리에 대해서/">JPA 쿼리에 대해서</a>
         </li>
       
     </ul>
@@ -493,7 +530,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
-            <a href="/tags/#OOP" title="OOP" rel="3">OOP</a>
+            <a href="/tags/#OOP" title="OOP" rel="4">OOP</a>
             
         
             
@@ -513,7 +550,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
-            <a href="/tags/#Book" title="Book" rel="3">Book</a>
+            <a href="/tags/#Book" title="Book" rel="4">Book</a>
             
         
             
@@ -536,7 +573,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>

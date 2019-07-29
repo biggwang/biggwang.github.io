@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://biggwang.github.io/2019/07/29/OOP/Object%20%EC%B1%85%20%EC%A0%95%EB%A6%AC/%EA%B0%9D%EC%B2%B4%20%EC%84%A4%EA%B3%84%20%ED%95%A0%20%EB%95%8C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A4%91%EC%8B%AC%EC%9D%B4%20%EC%95%84%EB%8B%8C%20%EC%B1%85%EC%9E%84%20%EC%A4%91%EC%8B%AC%EC%9C%BC%EB%A1%9C%20%ED%95%B4%EC%95%BC%20%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0/</loc>
+        <lastmod>2019-07-29T15:32:46.017Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://biggwang.github.io/2019/07/25/Docker/Docker%EB%A1%9C%20%EA%B0%9C%EB%B0%9C%20DB%20%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/</loc>
-        <lastmod>2019-07-28T12:33:52.419Z</lastmod>
+        <lastmod>2019-07-28T13:22:28.471Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
