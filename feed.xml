@@ -202,30 +202,6 @@
   </entry>
   
   <entry>
-    <title>N+1 문제 해결 방법</title>
-    <link href="https://biggwang.github.io/2019/07/10/JPA/JPA%20N+1%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%20%EB%B0%A9%EB%B2%95/"/>
-    <id>https://biggwang.github.io/2019/07/10/JPA/JPA N+1 문제 해결 방법/</id>
-    <published>2019-07-10T14:55:15.000Z</published>
-    <updated>2019-07-25T12:03:31.116Z</updated>
-    
-    <content type="html"><![CDATA[<h1><span id="예제-repository">예제 Repository</span></h1><p><a href="https://github.com/biggwang/learnning-subjects/tree/master/spring-jpa-n-plus-one" rel="external nofollow noopener noreferrer" target="_blank">류윤광 Github</a></p><h1><span id="학습목표">학습목표</span></h1><ul><li>N+1 문제가 무엇인지 안다.</li><li>그것을 해결하기 위한 방법이 어떤것이 있으면 각 방법에 장단점을 안다.</li><li>실무에 정확히 적용 할 줄 안다.</li></ul><h1><span id="우선-junit에-테스트-한다면-아래-사항을-주의-하자">우선 junit에 테스트 한다면 아래 사항을 주의 하자</span></h1><ul><li>junit은 기본적으로 테스트가 끝나면 rollback 되므로 그 영향으로 JPA에 영속성 컨텍스트에서 실행해야 할 쿼리를 날리지 않을 수 있다 어차피 롤백 될것이기 때문에 @Rollback(false)를 활용 하자</li><li>하나의 테스트 메소드 내에서 save하고 select하면 pxoy initialize session 에러를 접할 수 있는데 그때는 @Transactional 를 사용하자</li></ul><h1><span id="n-1-문제">N + 1 문제</span></h1><ul><li>영속성 컨텍스트에 <strong>지연로딩(Lazy Loading)</strong> 때문에 발생하는 현상이다.</li><li>A와 B테이블이 서로 1 to n 으로 연관관계가 있다고 하자.<br>쿼리로 따지면 조인하여 한번에 가져오고 싶은데 실제 사용 할 때마다 연관된 B테이블에 계속 쿼리를 날리는 것이다.</li><li>B테이블에 100개의 row가 있다면 100번을 날리는 것이다.</li><li>아래를 보자</li></ul><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_n_plus_one.jpg">  <p>총 11개의 쿼리가 날라갔다.</p><ul><li>A 테이블 select 1개</li><li>B 테이블 select 10개</li></ul><p>A 테이블만 조회</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Teacher&gt; teacherList = teacherRepository.findAll();</span><br></pre></td></tr></table></figure><p>하지만 B테이블에 정보를 원한건 아니었고 @OneToMany는 FetchType이 기본적으로 Lazy이므로 B테이블 데이터는 쿼리를 날리지 않는다. 대신 프로직시 객체를 가지고 있다.</p><p>이제 실제 B테이블을 사용 하려고 한다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; nameList = teacherList.stream()</span><br><span class="line">   .map(teacher -&gt; teacher.getStudents().get(<span class="number">0</span>).getName())</span><br><span class="line">   .collect(Collectors.toList());</span><br></pre></td></tr></table></figure><p>여기서 teacherList에 갯수가 만큰 select 쿼리가 발생하는 것이다.<br>이 부분에서 n+1 문제가 발생했다고 하는 것이다.<br>그렇다면 어떤 방법으로 해결 할 수 있을까?</p><h2><span id="해결방법-1-fetch-join">해결방법 1 fetch join</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TeacherRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Teacher</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"select t from Teacher t join fetch t.students"</span>)</span><br><span class="line">    <span class="function">List&lt;Teacher&gt; <span class="title">findAllJoinFetch</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_fetch_join.jpg">  <p>한번에 가져오기 위해 JPA가 쿼리를 만들어서 가져오게 한다. 이후에 말하겠지만 fetch join 은 inner join을 사용한다.</p><blockquote><p>TODO QueryDSL로도 fetch join 해보기</p></blockquote><h3><span id="fetch-join에-문제점-불필요한-쿼리를-발생시킨다">fetch join에 문제점 - 불필요한 쿼리를 발생시킨다.</span></h3><blockquote><p>TODO fetch join에 한계를 보여 줄 수 있는 코드 작성</p></blockquote><h2><span id="해결방법-2-entitygraph">해결방법 2 @EntityGraph</span></h2><p>내가 Eager로 가져오고 싶은것만 가져 올 수 있다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TeacherRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Teacher</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@EntityGraph</span>(attributePaths = <span class="string">"students"</span>)</span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"select t from Teacher t"</span>)</span><br><span class="line">    <span class="function">List&lt;Teacher&gt; <span class="title">findAllEntityGraph</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_entity_graph.jpg">  <h3><span id="entitygraph-사용-주의사항-outerjoin-그리고-중복">@EntityGraph 사용 주의사항 - OuterJoin 그리고 중복</span></h3><p>@EntityGraph는 OuterJoin을 사용하기 때문에 중복 데이터가 들어 올수 있는데 그것은 아래와 같이 Set을 통해 중복을 제거 할 수 있다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"teacher"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OneToMany</span>(fetch = FetchType.EAGER, cascade = CascadeType.ALL)</span><br><span class="line">    <span class="meta">@JoinColumn</span>(name=<span class="string">"teacher_id"</span>)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4><span id="하지만-어쨌든-불필요한-쿼리">하지만 어쨌든 불필요한 쿼리</span></h4><p>해당 방법은 Java에서 중복을 제거한거고 DB에 불필요한 쿼리를 날린건 똑같다.<br>애초에 OuterJoin을 안쓰도록 노력하는게 좋을것 같다.</p><h1><span id="지연로딩과-즉시로딩-개념">지연로딩과 즉시로딩 개념</span></h1><h2><span id="즉시로딩-eager">즉시로딩 (EAGER)</span></h2><ul><li>@ManyToOne 에서 기본값</li><li>연관된 엔티티에 모든 데이터를 DB 콜하여 한꺼번에 가져온다.</li></ul><h2><span id="지연로딩-lazy">지연로딩 (LAZY)</span></h2><ul><li>A 엔티티에 연관된 B 엔티티 정보가 있을때 A 엔티티 정보만 조회 하면 비효율적이므로 로딩을 지연하여 실제 사용할 때 데이터를 조회 한다.</li><li>실제 사용 할때는 B 엔티티 정보를 사용하고자 할 때 실제 쿼리가 DB에 날리게 된다.</li><li>A 엔티티에서 연관된 B 엔티티 정보는 Proxy 형태로 (디버그로 보면 jvst 문자가 포함됨) 가지고 있다가 실제로 B 엔티티를 사용 할 때 쿼리를 날린다.</li></ul><h2><span id="연관-관계의-엔티티를-어떻게-가져올-것인가">연관 관계의 엔티티를 어떻게 가져올 것인가</span></h2><ul><li>@OneToMany 기본값 Lazy</li><li>@ManyToMany 기본값 Eager</li></ul><p>Post, Comment 테이블 관계에서 Post에서 Comments데이터를 기본적으로 가져오지 않는다.<br>왜냐하면 Comment에 Row가 얼마나 있을지 모르기 때문이다. 그래서 OneToMany 기본값은 Lazy 이다.</p><p>즉, Post에 있는 데이터만 가져오겠다는 뜻이다.</p><h2><span id="프록시">프록시</span></h2><ul><li>엔티티를 조회할 때 영속성 컨텍스트에 존재하지 않으면 DB콜을 하게 되는데 그런 I/O 발생없이 실제 사용하는 시점까지 미루고 싶을때 사용한다.</li><li>즉, 지연로딩을 사용하기 위해 프록시 객체가 필요함</li></ul><blockquote><p>Memeber member = entityManager.getReference(Member.class, “member1”);</p></blockquote><h2><span id="참고">참고</span></h2><ul><li><a href="https://yellowh.tistory.com/125" rel="external nofollow noopener noreferrer" target="_blank">https://yellowh.tistory.com/125</a></li><li><a href="https://jojoldu.tistory.com/165" rel="external nofollow noopener noreferrer" target="_blank">https://jojoldu.tistory.com/165</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;&lt;span id=&quot;예제-repository&quot;&gt;예제 Repository&lt;/span&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/biggwang/learnning-subjects/tree/master/spring-jpa-n-p
-      
-    
-    </summary>
-    
-    
-      <category term="Learnning" scheme="https://biggwang.github.io/tags/Learnning/"/>
-    
-  </entry>
-  
-  <entry>
     <title>01. 객체,설계</title>
     <link href="https://biggwang.github.io/2019/07/10/OOP/Object%20%EC%B1%85%20%EC%A0%95%EB%A6%AC/01%20%EA%B0%9D%EC%B2%B4,%EC%84%A4%EA%B3%84/"/>
     <id>https://biggwang.github.io/2019/07/10/OOP/Object 책 정리/01 객체,설계/</id>
@@ -251,6 +227,30 @@
       <category term="OOP" scheme="https://biggwang.github.io/tags/OOP/"/>
     
       <category term="Book" scheme="https://biggwang.github.io/tags/Book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>N+1 문제 해결 방법</title>
+    <link href="https://biggwang.github.io/2019/07/10/JPA/JPA%20N+1%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%20%EB%B0%A9%EB%B2%95/"/>
+    <id>https://biggwang.github.io/2019/07/10/JPA/JPA N+1 문제 해결 방법/</id>
+    <published>2019-07-10T14:55:15.000Z</published>
+    <updated>2019-07-25T12:03:31.116Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="예제-repository">예제 Repository</span></h1><p><a href="https://github.com/biggwang/learnning-subjects/tree/master/spring-jpa-n-plus-one" rel="external nofollow noopener noreferrer" target="_blank">류윤광 Github</a></p><h1><span id="학습목표">학습목표</span></h1><ul><li>N+1 문제가 무엇인지 안다.</li><li>그것을 해결하기 위한 방법이 어떤것이 있으면 각 방법에 장단점을 안다.</li><li>실무에 정확히 적용 할 줄 안다.</li></ul><h1><span id="우선-junit에-테스트-한다면-아래-사항을-주의-하자">우선 junit에 테스트 한다면 아래 사항을 주의 하자</span></h1><ul><li>junit은 기본적으로 테스트가 끝나면 rollback 되므로 그 영향으로 JPA에 영속성 컨텍스트에서 실행해야 할 쿼리를 날리지 않을 수 있다 어차피 롤백 될것이기 때문에 @Rollback(false)를 활용 하자</li><li>하나의 테스트 메소드 내에서 save하고 select하면 pxoy initialize session 에러를 접할 수 있는데 그때는 @Transactional 를 사용하자</li></ul><h1><span id="n-1-문제">N + 1 문제</span></h1><ul><li>영속성 컨텍스트에 <strong>지연로딩(Lazy Loading)</strong> 때문에 발생하는 현상이다.</li><li>A와 B테이블이 서로 1 to n 으로 연관관계가 있다고 하자.<br>쿼리로 따지면 조인하여 한번에 가져오고 싶은데 실제 사용 할 때마다 연관된 B테이블에 계속 쿼리를 날리는 것이다.</li><li>B테이블에 100개의 row가 있다면 100번을 날리는 것이다.</li><li>아래를 보자</li></ul><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_n_plus_one.jpg">  <p>총 11개의 쿼리가 날라갔다.</p><ul><li>A 테이블 select 1개</li><li>B 테이블 select 10개</li></ul><p>A 테이블만 조회</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Teacher&gt; teacherList = teacherRepository.findAll();</span><br></pre></td></tr></table></figure><p>하지만 B테이블에 정보를 원한건 아니었고 @OneToMany는 FetchType이 기본적으로 Lazy이므로 B테이블 데이터는 쿼리를 날리지 않는다. 대신 프로직시 객체를 가지고 있다.</p><p>이제 실제 B테이블을 사용 하려고 한다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; nameList = teacherList.stream()</span><br><span class="line">   .map(teacher -&gt; teacher.getStudents().get(<span class="number">0</span>).getName())</span><br><span class="line">   .collect(Collectors.toList());</span><br></pre></td></tr></table></figure><p>여기서 teacherList에 갯수가 만큰 select 쿼리가 발생하는 것이다.<br>이 부분에서 n+1 문제가 발생했다고 하는 것이다.<br>그렇다면 어떤 방법으로 해결 할 수 있을까?</p><h2><span id="해결방법-1-fetch-join">해결방법 1 fetch join</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TeacherRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Teacher</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"select t from Teacher t join fetch t.students"</span>)</span><br><span class="line">    <span class="function">List&lt;Teacher&gt; <span class="title">findAllJoinFetch</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_fetch_join.jpg">  <p>한번에 가져오기 위해 JPA가 쿼리를 만들어서 가져오게 한다. 이후에 말하겠지만 fetch join 은 inner join을 사용한다.</p><blockquote><p>TODO QueryDSL로도 fetch join 해보기</p></blockquote><h3><span id="fetch-join에-문제점-불필요한-쿼리를-발생시킨다">fetch join에 문제점 - 불필요한 쿼리를 발생시킨다.</span></h3><blockquote><p>TODO fetch join에 한계를 보여 줄 수 있는 코드 작성</p></blockquote><h2><span id="해결방법-2-entitygraph">해결방법 2 @EntityGraph</span></h2><p>내가 Eager로 가져오고 싶은것만 가져 올 수 있다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TeacherRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Teacher</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@EntityGraph</span>(attributePaths = <span class="string">"students"</span>)</span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"select t from Teacher t"</span>)</span><br><span class="line">    <span class="function">List&lt;Teacher&gt; <span class="title">findAllEntityGraph</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><img src="/2019/07/10/JPA/JPA%20N+1%20문제%20해결%20방법/jpa_entity_graph.jpg">  <h3><span id="entitygraph-사용-주의사항-outerjoin-그리고-중복">@EntityGraph 사용 주의사항 - OuterJoin 그리고 중복</span></h3><p>@EntityGraph는 OuterJoin을 사용하기 때문에 중복 데이터가 들어 올수 있는데 그것은 아래와 같이 Set을 통해 중복을 제거 할 수 있다.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"teacher"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OneToMany</span>(fetch = FetchType.EAGER, cascade = CascadeType.ALL)</span><br><span class="line">    <span class="meta">@JoinColumn</span>(name=<span class="string">"teacher_id"</span>)</span><br><span class="line">    <span class="keyword">private</span> Set&lt;Student&gt; students = <span class="keyword">new</span> ArrayList&lt;&gt;();   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4><span id="하지만-어쨌든-불필요한-쿼리">하지만 어쨌든 불필요한 쿼리</span></h4><p>해당 방법은 Java에서 중복을 제거한거고 DB에 불필요한 쿼리를 날린건 똑같다.<br>애초에 OuterJoin을 안쓰도록 노력하는게 좋을것 같다.</p><h1><span id="지연로딩과-즉시로딩-개념">지연로딩과 즉시로딩 개념</span></h1><h2><span id="즉시로딩-eager">즉시로딩 (EAGER)</span></h2><ul><li>@ManyToOne 에서 기본값</li><li>연관된 엔티티에 모든 데이터를 DB 콜하여 한꺼번에 가져온다.</li></ul><h2><span id="지연로딩-lazy">지연로딩 (LAZY)</span></h2><ul><li>A 엔티티에 연관된 B 엔티티 정보가 있을때 A 엔티티 정보만 조회 하면 비효율적이므로 로딩을 지연하여 실제 사용할 때 데이터를 조회 한다.</li><li>실제 사용 할때는 B 엔티티 정보를 사용하고자 할 때 실제 쿼리가 DB에 날리게 된다.</li><li>A 엔티티에서 연관된 B 엔티티 정보는 Proxy 형태로 (디버그로 보면 jvst 문자가 포함됨) 가지고 있다가 실제로 B 엔티티를 사용 할 때 쿼리를 날린다.</li></ul><h2><span id="연관-관계의-엔티티를-어떻게-가져올-것인가">연관 관계의 엔티티를 어떻게 가져올 것인가</span></h2><ul><li>@OneToMany 기본값 Lazy</li><li>@ManyToMany 기본값 Eager</li></ul><p>Post, Comment 테이블 관계에서 Post에서 Comments데이터를 기본적으로 가져오지 않는다.<br>왜냐하면 Comment에 Row가 얼마나 있을지 모르기 때문이다. 그래서 OneToMany 기본값은 Lazy 이다.</p><p>즉, Post에 있는 데이터만 가져오겠다는 뜻이다.</p><h2><span id="프록시">프록시</span></h2><ul><li>엔티티를 조회할 때 영속성 컨텍스트에 존재하지 않으면 DB콜을 하게 되는데 그런 I/O 발생없이 실제 사용하는 시점까지 미루고 싶을때 사용한다.</li><li>즉, 지연로딩을 사용하기 위해 프록시 객체가 필요함</li></ul><blockquote><p>Memeber member = entityManager.getReference(Member.class, “member1”);</p></blockquote><h2><span id="참고">참고</span></h2><ul><li><a href="https://yellowh.tistory.com/125" rel="external nofollow noopener noreferrer" target="_blank">https://yellowh.tistory.com/125</a></li><li><a href="https://jojoldu.tistory.com/165" rel="external nofollow noopener noreferrer" target="_blank">https://jojoldu.tistory.com/165</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;&lt;span id=&quot;예제-repository&quot;&gt;예제 Repository&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/biggwang/learnning-subjects/tree/master/spring-jpa-n-p
+      
+    
+    </summary>
+    
+    
+      <category term="Learnning" scheme="https://biggwang.github.io/tags/Learnning/"/>
     
   </entry>
   
@@ -353,31 +353,6 @@
   </entry>
   
   <entry>
-    <title>팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편</title>
-    <link href="https://biggwang.github.io/2019/04/17/Design%20Patterns/%5BDesign%20Patterns%5D%20%ED%8C%A9%ED%86%A0%EB%A6%AC%20%ED%8C%A8%ED%84%B4,%20%EB%8F%84%EB%8C%80%EC%B2%B4%20%EC%99%9C%20%EC%93%B0%EB%8A%94%EA%B1%B0%EC%95%BC-%EC%8B%A4%EC%A0%84%20%EC%A0%81%EC%9A%A9%ED%8E%B8/"/>
-    <id>https://biggwang.github.io/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/</id>
-    <published>2019-04-17T14:25:05.000Z</published>
-    <updated>2019-07-10T14:42:50.438Z</updated>
-    
-    <content type="html"><![CDATA[<h3><span id="왜-팩토리-패턴을-적용했는가">왜 팩토리 패턴을 적용했는가?</span></h3><p>스케줄링 되는 배치를 개발 중이었다.<br>기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.<br>언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.<br>추가로 배치를 개발 해야 하는 것은 <strong>데이터 무결성을 체크하는 비교 배치</strong>, <strong>적재 실패된 데이터를 Retry하는 Retry배치</strong> 였다.<br>여기서 가장 먼저 든 생각은 아… 코드 중복이 생기겠구나 였다. 각각에 유형이 조금씩 다를 뿐 배치는 어차피 read, process, write 이기 때문이다.</p><p>그래서 디자인 패턴 및 객체지향적으로 코드를 작성해봐야 겠다. 라는 다짐이 리팩토링 및 디자인패턴 적용에 시초가 되었다.<br>가장먼저 생각이 드는 부분은 코드 중복을 최소화 하기 위해 공통적인 배치는 추상클래스로 만들어 놓고 각각에 입맛에 맞게 구상 배치 클래스를 두는 구조였다.</p><p>추가적으로 나는 배치 객체를 생성할 때 read, process, write 를 담당하는 각 객체들 또한 framework 화 하여 한꺼번에 객체를 생성하게끔 하여 나 말고 다른 개발자들이 또 새로운 배치를 만들어야 할 때 한가지 팩토리 클래스만 인스턴스하면 해당 배치를 사용 할 수 있게 하고 싶었다.</p><p>그랬다, 그래서 추상 팩토리 패턴을 선택하게 되었다.</p><h3><span id="그래서-내가-직접-사용해본-소감은">그래서 내가 직접 사용해본 소감은?</span></h3><p>추상 팩토리에 장점중에 하나는 클라이언트 코드에서 여기저기서 객체를 생성하는 코드가 퍼져있는 것을 다시 말해 변화되기 쉬운 코드 부분을 객체 생성을 담당하는 클래스(팩토리)를 만들어 놓으므로써 코드 수정을 한곳에서 할 수 있고 인터페이스, 추상클래스로 다형성을 활용하여 유연한 코드를 할 수 있다는것이 장점이라고 생각한다.</p><p>사실, 내가 실무에 적용한 팩토리 패턴에 큰 장점을 가질수 있는 상황은 아니었다.<br>배치 객체를 생성하는 코드 부분이 고작 각 배치별로 1개씩 밖에 없고 (배치라는 개발 특성인거 같다.) 한번 배치를 생성하면 다신 생성 할 필요가 없기 때문에 배치 객체를 생성하는 일이 그렇게 많지도 않다.</p><p>하지만 나는 배치와 배치를 생성하는 팩토리 배치 구조로 실무에 적용해봄으로써 디자인패턴을 하나하나 적용하면서 피부로 느껴 머릿속에 장기기억으로 남기고 싶어 적용해 본 것이다.</p><p>그렇다고 팩토리 패턴에 아예 효과를 보지 않았다는 소리는 아니다. read, process, write 에 대한 객체를 하나의 framework 역활을 한 것은 나이스했다고 생각한다.</p><h3><span id="그래서-언제-사용하면-좋을까">그래서 언제 사용하면 좋을까?</span></h3><p>객체를 인스턴스하는 코드가 클라이언트에서 많이 이용되고 자주 변화가 이루어진다면 팩토리 패턴을 사용하기 적합하다고 생각한다.</p><h3><span id="다른-유용한-패턴을-적용해-볼게-있다면">다른 유용한 패턴을 적용해 볼게 있다면?</span></h3><p>배치 객체안에 reader, processor, writer 를 담당하는 각 객체가 있는데 그 step들이 끝날때 마다 결과 데이터를 갱신해주는 결과 객체를 반환하고 싶은데 이것을 옵저버 패턴을 이용하면 좋을 것 같다는 생각이 들었다.<br>그래서 다음 포스팅은 옵저버 패턴을 활용한 포스팅을 올리도록 하겠다.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3&gt;&lt;span id=&quot;왜-팩토리-패턴을-적용했는가&quot;&gt;왜 팩토리 패턴을 적용했는가?&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;스케줄링 되는 배치를 개발 중이었다.&lt;br&gt;
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추
-      
-    
-    </summary>
-    
-    
-      <category term="Design Patterns" scheme="https://biggwang.github.io/tags/Design-Patterns/"/>
-    
-  </entry>
-  
-  <entry>
     <title>옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편</title>
     <link href="https://biggwang.github.io/2019/04/17/Design%20Patterns/%5BDesign%20Patterns%5D%20%EC%98%B5%EC%A0%80%EB%B2%84%20%ED%8C%A8%ED%84%B4,%20%EB%8F%84%EB%8C%80%EC%B2%B4%20%EC%99%9C%20%EC%93%B0%EB%8A%94%EA%B1%B0%EC%95%BC-%EA%B8%B0%EB%B3%B8%20%EC%9D%B4%EB%A1%A0%ED%8E%B8/"/>
     <id>https://biggwang.github.io/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/</id>
@@ -393,6 +368,31 @@
         &lt;h3&gt;&lt;span id=&quot;옵저버-패턴이란&quot;&gt;옵저버 패턴이란?&lt;/span&gt;&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스
+      
+    
+    </summary>
+    
+    
+      <category term="Design Patterns" scheme="https://biggwang.github.io/tags/Design-Patterns/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편</title>
+    <link href="https://biggwang.github.io/2019/04/17/Design%20Patterns/%5BDesign%20Patterns%5D%20%ED%8C%A9%ED%86%A0%EB%A6%AC%20%ED%8C%A8%ED%84%B4,%20%EB%8F%84%EB%8C%80%EC%B2%B4%20%EC%99%9C%20%EC%93%B0%EB%8A%94%EA%B1%B0%EC%95%BC-%EC%8B%A4%EC%A0%84%20%EC%A0%81%EC%9A%A9%ED%8E%B8/"/>
+    <id>https://biggwang.github.io/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/</id>
+    <published>2019-04-17T14:25:05.000Z</published>
+    <updated>2019-07-10T14:42:50.438Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="왜-팩토리-패턴을-적용했는가">왜 팩토리 패턴을 적용했는가?</span></h3><p>스케줄링 되는 배치를 개발 중이었다.<br>기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.<br>언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.<br>추가로 배치를 개발 해야 하는 것은 <strong>데이터 무결성을 체크하는 비교 배치</strong>, <strong>적재 실패된 데이터를 Retry하는 Retry배치</strong> 였다.<br>여기서 가장 먼저 든 생각은 아… 코드 중복이 생기겠구나 였다. 각각에 유형이 조금씩 다를 뿐 배치는 어차피 read, process, write 이기 때문이다.</p><p>그래서 디자인 패턴 및 객체지향적으로 코드를 작성해봐야 겠다. 라는 다짐이 리팩토링 및 디자인패턴 적용에 시초가 되었다.<br>가장먼저 생각이 드는 부분은 코드 중복을 최소화 하기 위해 공통적인 배치는 추상클래스로 만들어 놓고 각각에 입맛에 맞게 구상 배치 클래스를 두는 구조였다.</p><p>추가적으로 나는 배치 객체를 생성할 때 read, process, write 를 담당하는 각 객체들 또한 framework 화 하여 한꺼번에 객체를 생성하게끔 하여 나 말고 다른 개발자들이 또 새로운 배치를 만들어야 할 때 한가지 팩토리 클래스만 인스턴스하면 해당 배치를 사용 할 수 있게 하고 싶었다.</p><p>그랬다, 그래서 추상 팩토리 패턴을 선택하게 되었다.</p><h3><span id="그래서-내가-직접-사용해본-소감은">그래서 내가 직접 사용해본 소감은?</span></h3><p>추상 팩토리에 장점중에 하나는 클라이언트 코드에서 여기저기서 객체를 생성하는 코드가 퍼져있는 것을 다시 말해 변화되기 쉬운 코드 부분을 객체 생성을 담당하는 클래스(팩토리)를 만들어 놓으므로써 코드 수정을 한곳에서 할 수 있고 인터페이스, 추상클래스로 다형성을 활용하여 유연한 코드를 할 수 있다는것이 장점이라고 생각한다.</p><p>사실, 내가 실무에 적용한 팩토리 패턴에 큰 장점을 가질수 있는 상황은 아니었다.<br>배치 객체를 생성하는 코드 부분이 고작 각 배치별로 1개씩 밖에 없고 (배치라는 개발 특성인거 같다.) 한번 배치를 생성하면 다신 생성 할 필요가 없기 때문에 배치 객체를 생성하는 일이 그렇게 많지도 않다.</p><p>하지만 나는 배치와 배치를 생성하는 팩토리 배치 구조로 실무에 적용해봄으로써 디자인패턴을 하나하나 적용하면서 피부로 느껴 머릿속에 장기기억으로 남기고 싶어 적용해 본 것이다.</p><p>그렇다고 팩토리 패턴에 아예 효과를 보지 않았다는 소리는 아니다. read, process, write 에 대한 객체를 하나의 framework 역활을 한 것은 나이스했다고 생각한다.</p><h3><span id="그래서-언제-사용하면-좋을까">그래서 언제 사용하면 좋을까?</span></h3><p>객체를 인스턴스하는 코드가 클라이언트에서 많이 이용되고 자주 변화가 이루어진다면 팩토리 패턴을 사용하기 적합하다고 생각한다.</p><h3><span id="다른-유용한-패턴을-적용해-볼게-있다면">다른 유용한 패턴을 적용해 볼게 있다면?</span></h3><p>배치 객체안에 reader, processor, writer 를 담당하는 각 객체가 있는데 그 step들이 끝날때 마다 결과 데이터를 갱신해주는 결과 객체를 반환하고 싶은데 이것을 옵저버 패턴을 이용하면 좋을 것 같다는 생각이 들었다.<br>그래서 다음 포스팅은 옵저버 패턴을 활용한 포스팅을 올리도록 하겠다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;왜-팩토리-패턴을-적용했는가&quot;&gt;왜 팩토리 패턴을 적용했는가?&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;스케줄링 되는 배치를 개발 중이었다.&lt;br&gt;
+기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추
       
     
     </summary>
