@@ -98,31 +98,6 @@
   </entry>
   
   <entry>
-    <title>Docker MySql 이미지로 개발 DB 환경 구성하기</title>
-    <link href="https://biggwang.github.io/2019/07/25/Docker/Docker%EB%A1%9C%20%EA%B0%9C%EB%B0%9C%20DB%20%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/"/>
-    <id>https://biggwang.github.io/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/</id>
-    <published>2019-07-25T11:05:15.000Z</published>
-    <updated>2019-07-28T13:22:28.471Z</updated>
-    
-    <content type="html"><![CDATA[<h1><span id="docker로-난-무얼-하고-싶었나">Docker로 난 무얼 하고 싶었나??</span></h1><p>환경에 제약 없이 개발 DB를 구성하고 싶었다.<br>맥북에서 공부한 내용을 실습하면서 개발하고 개발한 소스 Github에 올리고 집에서는 Github에서 소스를 받아서 하면됬다.<br>근데, DB는?? 내가 저장한 데이터 DB 컨텍스트 정보는 환경이 바뀌면 매번 설치하고 데이터 싱크 맞추기 위해 쿼리 만들고 스크립트 돌려야 하나?  게다가 집은 Window PC이다… 개발하기도 전에 환경 구성하는 것 때문에 지친다…</p><p>그러다 문득 Docker! Docker로 이미지 만들고 Docker Hub 에 올려 놓으면 그 짜증나는 환경 구성이 해결 되지 않을까??<br>Docker를 왜 쓸까? 했는데 나에게 Docker가 필요해진 경우가 생긴 것이다.</p><h1><span id="하지만-반영되지-않는-db-데이터">하지만 반영되지 않는 DB 데이터</span></h1><p>아무리 삽질을해도 MySql 컨테이너에서 만든 데이터를 Docker Hub에 Push를 해도 반영이 되지 않았다.  알고보니 Docker에서 데이터를 저장하고 싶으면 Docker Container 외 별도 디렉토리(Volume)에 보관을 해야 한다는 것이다. 아래 블로그에서 도움을 받았다.</p><p><a href="https://joonhwan.github.io/2018-11-14-fix-mysql-volume-share-issue/" rel="external nofollow noopener noreferrer" target="_blank">Docker Volume 개념 및 MySql을 Docker상에서 운용하는 방법</a></p><p>Docker Container 가 삭제 되면 데이터는 보관되지 않고 같이 삭제된다. 즉, DB 데이터가 날라간다…</p><p>volume 설정이 필요한 순간이다. 아래 Volume 관련 명령어를 참고하자.</p><h1><span id="명령어-정리">명령어 정리</span></h1><h2><span id="docker-기본-명령어">Docker 기본 명령어</span></h2><p><strong>이미지 관련</strong></p><ul><li>docker images</li><li>docker run imageID</li><li>docker rmi imageID</li></ul><p><strong>컨테이너 관련</strong></p><ul><li>docker ps</li><li>docker ps -a</li><li>docker start containerID</li><li>docker stop containerID</li><li>docker rm continerID</li></ul><p><strong>Volume 관련</strong></p><ul><li>docker volume create mysql-volume</li><li>docker volume ls</li><li>docker run --rm -d --name mysqldb -e MYSQL_ROOT_PASSWORD=1111 -v mysql-volume:/var/lib/mysql mysql</li><li>docker volume inspect mysql-volume</li></ul><hr><h2><span id="mysql-셋팅">MySql 셋팅</span></h2><ul><li>docker pull mysql:5.7</li><li>docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1111 --name ryu mysql:5.7</li><li>docker exec -i -t ryu bash</li></ul><h2><span id="docker-hub-관련">Docker Hub 관련</span></h2><ul><li>docker commmit container_name image_name</li><li>docker login</li><li>$ export DOCKER_ID_USER=“nicewoong”</li><li>docker tag ubuntu-cpp-driver $DOCKER_ID_USER/ubuntu-cpp-driver</li><li>docker push $DOCKER_ID_USER/ubuntu-cpp-driver</li></ul><h1><span id="참고">참고</span></h1><ul><li><a href="https://jayden-lee.github.io/post/docker/mysql-install/" rel="external nofollow noopener noreferrer" target="_blank">Docker를 이용한 MySQL 설치 방법</a></li><li><a href="https://nicewoong.github.io/development/2018/03/06/docker-commit-container/" rel="external nofollow noopener noreferrer" target="_blank">Docker(도커) 컨테이너 커밋, 이미지 푸쉬하기</a></li><li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Beginner.html" rel="external nofollow noopener noreferrer" target="_blank">MySQL by Examples for Beginners</a></li><li><a href="https://cjh5414.github.io/mysql-create-user/" rel="external nofollow noopener noreferrer" target="_blank">Mysql 사용자 추가, 제거 및 권한 부여</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;&lt;span id=&quot;docker로-난-무얼-하고-싶었나&quot;&gt;Docker로 난 무얼 하고 싶었나??&lt;/span&gt;&lt;/h1&gt;
-&lt;p&gt;환경에 제약 없이 개발 DB를 구성하고 싶었다.&lt;br&gt;
-맥북에서 공부한 내용을 실습하면서 개발하고 개발한 소스 Github
-      
-    
-    </summary>
-    
-    
-      <category term="Learnning" scheme="https://biggwang.github.io/tags/Learnning/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Spock 으로 Controller 파일 업로드 테스트 해보기</title>
     <link href="https://biggwang.github.io/2019/07/25/Spock/Spock%20%EC%9C%BC%EB%A1%9C%20Controller%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%ED%95%B4%EB%B3%B4%EA%B8%B0/"/>
     <id>https://biggwang.github.io/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/</id>
@@ -143,6 +118,22 @@
     
     
       <category term="Experience" scheme="https://biggwang.github.io/tags/Experience/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker MySql 이미지로 개발 DB 환경 구성하기</title>
+    <link href="https://biggwang.github.io/2019/07/25/Docker/Docker%EB%A1%9C%20%EA%B0%9C%EB%B0%9C%20DB%20%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/"/>
+    <id>https://biggwang.github.io/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/</id>
+    <published>2019-07-25T11:05:15.000Z</published>
+    <updated>2019-07-31T14:07:50.921Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Learnning" scheme="https://biggwang.github.io/tags/Learnning/"/>
     
   </entry>
   
