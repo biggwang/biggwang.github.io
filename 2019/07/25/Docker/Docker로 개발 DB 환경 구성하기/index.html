@@ -222,7 +222,25 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h1><span id="docker로-난-무얼-하고-싶었나">Docker로 난 무얼 하고 싶었나??</span></h1>
+<p>환경에 제약 없이 개발 DB를 구성하고 싶었다.<br>
+맥북에서 공부한 내용을 실습하면서 개발하고 개발한 소스 Github에 올리고 집에서는 Github에서 소스를 받아서 하면됬다.<br>
+근데, DB는?? 내가 저장한 데이터 DB 컨텍스트 정보는 환경이 바뀌면 매번 설치하고 데이터 싱크 맞추기 위해 쿼리 만들고 스크립트 돌려야 하나?  게다가 집은 Window PC이다… 개발하기도 전에 환경 구성하는 것 때문에 지친다…</p>
+<p>그러다 문득 Docker! Docker로 이미지 만들고 Docker Hub 에 올려 놓으면 그 짜증나는 환경 구성이 해결 되지 않을까??<br>
+Docker를 왜 쓸까? 했는데 나에게 Docker가 필요해진 경우가 생긴 것이다.</p>
+<h1><span id="하지만-반영되지-않는-db-데이터">하지만 반영되지 않는 DB 데이터</span></h1>
+<p>mysql 을 이미지를 받아 아래 처럼 셋팅 후</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- docker pull mysql:<span class="number">5.7</span> </span><br><span class="line">- docker run -d -p <span class="number">3306</span>:<span class="number">3306</span> -e MYSQL_ROOT_PASSWORD=<span class="number">1111</span> --name ryu mysql:<span class="number">5.7</span></span><br><span class="line">- docker exec -it ryu bash</span><br></pre></td></tr></table></figure>
+<p>아무리 삽질을해도 MySql 컨테이너에서 만든 데이터를 Docker Hub에 Push를 해도 반영이 되지 않았다.  알고보니 Docker에서 데이터를 저장하고 싶으면 Docker Container 외 별도 디렉토리(Volume)에 보관을 해야 한다는 것이다. 아래 블로그에서 도움을 받았다.</p>
+<p>Docker Container 가 삭제 되면 데이터는 보관되지 않고 같이 삭제된다. 즉, DB 데이터가 날라간다…</p>
+<h1><span id="참고">참고</span></h1>
+<ul>
+<li><a href="https://jayden-lee.github.io/post/docker/mysql-install/" rel="external nofollow noopener noreferrer" target="_blank">Docker를 이용한 MySQL 설치 방법</a></li>
+<li><a href="https://nicewoong.github.io/development/2018/03/06/docker-commit-container/" rel="external nofollow noopener noreferrer" target="_blank">Docker(도커) 컨테이너 커밋, 이미지 푸쉬하기</a></li>
+<li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/sql/MySQL_Beginner.html" rel="external nofollow noopener noreferrer" target="_blank">MySQL by Examples for Beginners</a></li>
+<li><a href="https://cjh5414.github.io/mysql-create-user/" rel="external nofollow noopener noreferrer" target="_blank">Mysql 사용자 추가, 제거 및 권한 부여</a></li>
+</ul>
+
                 
 
                 <hr>
@@ -265,7 +283,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="nav">none</ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Docker로 난 무얼 하고 싶었나??</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">하지만 반영되지 않는 DB 데이터</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">참고</span></a></li></ol>
         
         </div>
       </aside>
