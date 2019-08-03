@@ -221,6 +221,37 @@
 
 <div class="post-preview">
 
+    <a href="/2019/07/31/OOP/상속보다는 합성을 사용해야 하는 이유/">
+        <h2 class="post-title">
+            상속보다는 합성을 사용해야 하는 이유
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            들어가며
+상속은 막연히 부모 자식 관계 합성은 Setter 메소드 처럼 객체를 주입받는 패턴 정도만 알고 있었는데 “오브젝트 - 조영호” 책을 읽으면서 내용을 학습하여 이해하고자 정리 합니다. 그러면 먼저 상속과 합성이 무엇인지 부터 제가 깨닳은 내용을 공유해 드리죠
+왜 상속보단 합성을 써야 할 까?
+공통 역활을 수행하는 부모 클래스를 두고 부모 기능......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Yungwang Ryu on
+            2019-07-31
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#OOP" title="OOP">OOP</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/07/31/OOP/객체지향 캡슐화 그것이 알고 싶다/">
         <h2 class="post-title">
             객체지향 캡슐화 그것이 알고 싶다.
@@ -705,24 +736,19 @@ SRP(Single Responsibility Principle) 단일 책......
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
         <h2 class="post-title">
-            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
+            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
         </h2>
         <h3 class="post-subtitle">
-            옵저버 패턴 파헤치기
+            팩토리 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            옵저버 패턴이란?
-
-한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
-
-언제 사용할까?
-내가 만든 예제 (구독자에게 미세먼지 전달 하기)
-  
-Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
-Observer
-123public i......
+            왜 팩토리 패턴을 적용했는가?
+스케줄링 되는 배치를 개발 중이었다.
+기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
+언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
+추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
         </div>
     </a>
     
@@ -742,19 +768,24 @@ Observer
 
 <div class="post-preview">
 
-    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/">
+    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/">
         <h2 class="post-title">
-            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
         </h2>
         <h3 class="post-subtitle">
-            팩토리 패턴 파헤치기
+            옵저버 패턴 파헤치기
         </h3>
         <div class="post-content-preview">
-            왜 팩토리 패턴을 적용했는가?
-스케줄링 되는 배치를 개발 중이었다.
-기존 배치(General)가 주기적으로 Source DB에 데이터를 이관하고 있었다. 이후 추가 배치를 개발 해야 되는 상황이 왔다.
-언제나 그랬듯이 항상 수정 및 추가 개발 건이 생긴다.
-추가로 배치를 개발 해야 하는 것은 데이터 무결성을 체크하는 비교 배치, 적재 실패된 데이터를 ......
+            옵저버 패턴이란?
+
+한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정희 - 헤드퍼스트 참고
+
+언제 사용할까?
+내가 만든 예제 (구독자에게 미세먼지 전달 하기)
+  
+Publisher, Observer 가 핵심이다. 각 역활은 아래와 같다.
+Observer
+123public i......
         </div>
     </a>
     
@@ -1228,6 +1259,10 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
     <ul>
       
         <li>
+          <a href="/2019/07/31/OOP/상속보다는 합성을 사용해야 하는 이유/">상속보다는 합성을 사용해야 하는 이유</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/31/OOP/객체지향 캡슐화 그것이 알고 싶다/">객체지향 캡슐화 그것이 알고 싶다.</a>
         </li>
       
@@ -1241,10 +1276,6 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
       
         <li>
           <a href="/2019/07/25/JPA/JPA 커스텀 리파지토리 만드는 방법/">JPA 커스텀 리파지토리 만드는 방법</a>
-        </li>
-      
-        <li>
-          <a href="/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/">Docker MySql 이미지로 개발 DB 환경 구성하기</a>
         </li>
       
     </ul>
@@ -1282,7 +1313,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
             
         
             
-            <a href="/tags/#OOP" title="OOP" rel="5">OOP</a>
+            <a href="/tags/#OOP" title="OOP" rel="6">OOP</a>
             
         
             
@@ -1313,7 +1344,7 @@ DB 접속하여 데이터를 실시간 주기로 데이터를 targetDB에 적재
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
