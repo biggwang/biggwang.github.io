@@ -151,14 +151,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -233,6 +233,21 @@
                     <span class="tag-text">2019</span>
                 </span>
                 <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-14
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/08/14/회고/첫오픈 준비/" style="color: #0085a1">
+                        <span>
+                            첫 서비스 오픈 준비를 하며
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -316,9 +331,9 @@
                  <li>
                     07-25
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/" style="color: #0085a1">
+                    <a href="/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/" style="color: #0085a1">
                         <span>
-                            Spock 으로 Controller 파일 업로드 테스트 해보기
+                            Docker MySql 이미지로 개발 DB 환경 구성하기
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -331,9 +346,9 @@
                  <li>
                     07-25
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2019/07/25/Docker/Docker로 개발 DB 환경 구성하기/" style="color: #0085a1">
+                    <a href="/2019/07/25/Spock/Spock 으로 Controller 파일 업로드 테스트 해보기/" style="color: #0085a1">
                         <span>
-                            Docker MySql 이미지로 개발 DB 환경 구성하기
+                            Spock 으로 Controller 파일 업로드 테스트 해보기
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -466,9 +481,9 @@
                  <li>
                     04-17
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/" style="color: #0085a1">
+                    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/" style="color: #0085a1">
                         <span>
-                            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
+                            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -481,9 +496,9 @@
                  <li>
                     04-17
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2019/04/17/Design Patterns/[Design Patterns] 옵저버 패턴, 도대체 왜 쓰는거야-기본 이론편/" style="color: #0085a1">
+                    <a href="/2019/04/17/Design Patterns/[Design Patterns] 팩토리 패턴, 도대체 왜 쓰는거야-실전 적용편/" style="color: #0085a1">
                         <span>
-                            옵저버 패턴, 도대체 왜 쓰는거야? - 기본 이론편
+                            팩토리 패턴, 도대체 왜 쓰는거야? - 실전 적용편
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -735,6 +750,10 @@
     <ul>
       
         <li>
+          <a href="/2019/08/14/회고/첫오픈 준비/">첫 서비스 오픈 준비를 하며</a>
+        </li>
+      
+        <li>
           <a href="/2019/07/31/OOP/객체지향 캡슐화 그것이 알고 싶다/">객체지향 캡슐화 그것이 알고 싶다.</a>
         </li>
       
@@ -750,10 +769,6 @@
           <a href="/2019/07/27/JPA/JPA 영속성 컨텍스트 엔티티 관리 방법/">JPA 영속성 컨텍스트 엔티티 관리 방법</a>
         </li>
       
-        <li>
-          <a href="/2019/07/25/JPA/JPA 커스텀 리파지토리 만드는 방법/">JPA 커스텀 리파지토리 만드는 방법</a>
-        </li>
-      
     </ul>
   </div>
 </h5>
@@ -767,7 +782,11 @@
     <div class="tags">
         
             
+        
+            
             <a href="/tags/#Design Patterns" title="Design Patterns" rel="4">Design Patterns</a>
+            
+        
             
         
             
@@ -781,7 +800,7 @@
             
         
             
-        
+            <a href="/tags/#Book" title="Book" rel="4">Book</a>
             
         
             
@@ -805,11 +824,7 @@
             
         
             
-            <a href="/tags/#Book" title="Book" rel="4">Book</a>
-            
-        
-            
-            <a href="/tags/#회고" title="회고" rel="3">회고</a>
+            <a href="/tags/#회고" title="회고" rel="4">회고</a>
             
         
     </div>
@@ -820,7 +835,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
