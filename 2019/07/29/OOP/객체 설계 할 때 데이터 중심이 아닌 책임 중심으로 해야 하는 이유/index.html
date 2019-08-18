@@ -224,26 +224,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="들어가며">들어가며</span></h1>
-<p>오브젝트 | 조영호 4장 읽으면서 학습하고 이해한 내용을 나의 언어로 공유합니다.</p>
-<h1><span id="객체-데이터-중심은-객체의-행동보다는-상태에-초점을-맞추게되어-캡슐화-위반을-쉽게-하게-만든다">객체 데이터 중심은 객체의 행동보다는 상태에 초점을 맞추게되어 캡슐화 위반을 쉽게 하게 만든다.</span></h1>
+                <h3><span id="왜-oop를-할-때-데이터-중심으로-하면-안될까">왜 OOP를 할 때 데이터 중심으로 하면 안될까??</span></h3>
+<p>데이터는 구현이다. 여기서 말하는 구현은 객체의 상태값이 될수도 있고 객체가 수행하는 로직이 될 수 도 있다. 즉, 객체 내부에서만 접근 가능한 것들이다.<br>
+구현은 얼마든지 변경이 생길수 있기 때문에 데이터 중심으로 객체간 협력을 하게 되면 변경에 취약하게 된다.</p>
+<p>책임은 인터페이스다. 책임 중심으로 이 객체는 어떤 책임을 가져야하는가? 라는 물음으로 객체를 설계하면 객체의 내부 구현은 캡슐화 화면서 설계 할 수 있기 때문에<br>
+코드 응집도 높고 변경에 유연한 설계를 얻을 수 있게 된다.</p>
+<h3><span id="데이터-중심-객체-설게-문제점-1-캡슐화-위반">데이터 중심 객체 설게 문제점 1 - 캡슐화 위반</span></h3>
+<p>객체가 어떤 책임을 가져야 하는지 알 수 있을려면 이 객체가 다른 객체와 어떤 협력을 해야햐는지 파악되야 어떤 책임을 가져야 하는지 알게 되는 것이다.<br>
+즉 협력이 있어야 책임도 있는 것이다. 그러한 반면에 데이터 중심 객체 설계는 이 객체가 어떤 협력과 책임은 고려하지 않고 오직 어떠한 데이터가 필요한지에만 관심이 있다.<br>
+이렇게 되면 개발자는 앞으로 어떤 데이터로 협력 될지 모르리 때문에 과도하게 접근자, 수정자를 추가하게 된다. 즉 캡슐화를 위반하기 쉽게 되는 상황을 만든다는 것이다.</p>
+<p><strong>추측에 의한 설계가 아닌 객체가 어떤 협력을 하는지 명확히 인지한 상태에서 어떠한 책임을 가져야하는지 알고 객체</strong>를 설계 해야 하는 것이다.</p>
+<p><strong>데이터 중심 설계 객체 예제</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Movie</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> Duration runningTime;</span><br><span class="line">    <span class="keyword">private</span> Money fee;</span><br><span class="line">    <span class="keyword">private</span> List&lt;DiscountCondition&gt; discountConditions;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> MovieType movieType;</span><br><span class="line">    <span class="keyword">private</span> Money discountAmount;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> discountPercent;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getter, setter..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>과도하게 많은 데이터를 포함하게 되고 접근자, 수정자를 만들어 객체 캡슐화를 위반하게 만든다.</p>
+<p><strong>책임 중심 설계 객체 예제</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Movie</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> Duration runningTime;</span><br><span class="line">    <span class="keyword">private</span> Money fee;</span><br><span class="line">    <span class="keyword">private</span> DiscountPolicy discountPolicy;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// getter, setter..</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2019/07/29/OOP/객체%20설계%20할%20때%20데이터%20중심이%20아닌%20책임%20중심으로%20해야%20하는%20이유/object-1.png">  
+<p>Movie 객체에 역활은 영화에 대한 정보를 가지고 있어야 하고 그 정보를 다른 객체 (예약, 상영)에서 활용하게 된다.<br>
+하지만 Movice 책임 영화에 대한 정보만 있으면 돤다. 영화 할인 정책에 관한 처리는 따른 객체 DiscountPolicy 에게 위임 또는 협력하여 정보를 가져오면 되는 것이다.</p>
+<h3><span id="데이터-중심-객체-설게-문제점-2-높은-결합도">데이터 중심 객체 설게 문제점 2 - 높은 결합도</span></h3>
+<p>객체에 과도하게 많은 접근자와 수정자가 생격 다른 객체에서 접근하여 사용 할 확률이 높다. 그렇게 되면 수정사항이 발생하면 사용한 객체들에게 모두 영향을 미치게 된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReservationAgency</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Reservation <span class="title">reserve</span><span class="params">(Screening screening, Customer customer, <span class="keyword">int</span> audienceCount)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        fee = movie.getFee().minus(discountAmount).times(audienceCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>movie.getFee() 리턴 타입이 변경되면 어떻게 될까?? .getFee()를 하는 모든 객체 타입을 변경해줘야한다.</p>
+<h3><span id="데이터-중심-객체-설게-문제점-3-낮은-응집도">데이터 중심 객체 설게 문제점 3 - 낮은 응집도</span></h3>
 <blockquote>
-<p>데이터 중심의 설계는 본질적으로 너무 이른 시기에 데이터에 관해 결정하도록 강요한다.</p>
+<p>서로 다른 이유로 변경되는 코드가 하나의 모듈 안에 공존할 때 모듈의 응집도가 낮다고 말한다.</p>
 </blockquote>
-<p>협력에 의한 문맥안에서 객체들간에 역활과 책임을 통해 변경에 유연한 객체지향 프로그래밍과 달리 데이터 중심으로 객체를 바라 보게 되면 무슨 일이 일어 날까요?  필요한 데이터가 무엇이지? 에서 출발 하다 보니 객체 안에 서로 다른 많은 객체를 품을 수 있습니다. 그렇게 되면 그 객체 안에서 데이터를 사용하기 위한 로직이 들어가게 되고 그것은 변경에 취약한 코드를 만드는 셈이죠. 또 getter, setter도 많이 추가 될 수 있어 캡슐화를 위반하기 쉬운 구조가 되는 것입니다. 다시 말하지만 캡슐화를 잘 해야 변경에 유연한 코드를 만들 수 있습니다.</p>
-<h1><span id="데이터-중심보단-책임행동-중심으로-객체를-설계해야-하는-이유">데이터 중심보단 책임(행동) 중심으로 객체를 설계해야 하는 이유</span></h1>
-<ul>
-<li>
-<p>협력하는 그 문맥에서 객체들끼리 하는 역활과 책임이 무엇인가? 에서 출발해야 객체를 설계 할 때, 역활과 책임을 생각하면서 자기가 할 일은 스스로 처리하고 협력하기 위한 인터페이스를 제공함으로써 자연스럽게 캡슐화를 하는 행동으로 이어질 수 있습니다. 데이터는 나중 얘기입니다. 설계의 중심은 내부가 아닌 외부에서 결정해야 합니다. 데이터로 설계하면 그것은 이미 객체를 구현한 것입니다. 객체간에 협력이나 책임에 대한 고려는 없습니다. 협력에 대한 고려없이 협력하려하면 많은 예외 코드가 발생하고 의존도도 높아지게 됩니다.</p>
-</li>
-<li>
-<p>데이터 중심으로 설계하다보니 데이터를 처리하기 위한 오퍼레이션이 인터페이스(메소드, 파라미터 등)에 고스란히 드러나게 되고 이는 변경에 굉장히 취약해 집니다. 구체적으로 메소드에 파라미터를 3개 받았는데 1개만 받도록 변경되면 어떡하죠? 그 메소드 호출한 코드도 다 변경해줘야합니다.</p>
-</li>
-</ul>
-<h1><span id="데이터-중심-설계로인한-결합도가-높아진-케이스">데이터 중심 설계로인한 결합도가 높아진 케이스</span></h1>
-<p>데이터 중심으로 객체를 설계하다보니 가져다 쓰는 데이터 들이 많고 이는 한 객체에 너무 많은 제어 로직을 가질 수 있게 됩니다.<br>
-아래 구조도와 같이 ReservationAgency 객체는 너무 많은 객체들에 참조가 이루어져 있고 뭐 좀 변경하려 하면 ReservationAgency 객체도 수정해줘야 합니다. 즉, 겹할도가 엄청 높아인것이죠.</p>
-<img src="/2019/07/29/OOP/객체%20설계%20할%20때%20데이터%20중심이%20아닌%20책임%20중심으로%20해야%20하는%20이유/object-1.png">
+<p>이것또한 과도한 접근을 허용하게 되어 여러 객체에서 접근하여 로직을 작성하다 보니 하나에 객체에 많은 접근자가 있을 것이고 어떠한 이유로 수정하려 하는데<br>
+다른 객체에 영향을 미치게 한다는 것이다. 다 캡슐화를 위반하게 만들어서 발생하는 이유이다.</p>
+<p>이 모든 문제는 데이터 중심으로 객체를 설계하다 보니 숨겨야 할 상태들을 숨기지 않고 인터페이스로 노출시켜 여러 객체들에 의존성이 강하게 결합되어 변경에 취약하게 된 것이다.<br>
+즉, 캡슐화가 깨져서 그런 것이다. 따라서 객체간에 어떠한 협력을 하는지 생각하고 책임중심으로 설계해야 캡슐화에 이점을 가지고 변경에 유연한 설계를 가질수 있게 된다.</p>
+<p>앞으로 실무에서 보게 되는 클래스로 보지 말고 이 객체가 어떻게 협력하고 있는지를 그 문맥을 기반으로 캡슐화가 잘 되어 있는지 생각하면서 수정, 개발을 해야겠다.<br>
+그래야 진정으로 책임 중심 객체 설계를 해야 하는 이유를 머릿속에 각인이 될 것이기 때문이다.</p>
+
                 
 
                 <hr>
@@ -251,7 +264,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2019/07/31/OOP/상속보다는 합성을 사용해야 하는 이유/" data-toggle="tooltip" data-placement="top" title="상속보다는 합성을 사용해야 하는 이유">&larr; Previous Post</a>
+                            <a href="/2019/07/31/OOP/객체지향 캡슐화 그것이 알고 싶다/" data-toggle="tooltip" data-placement="top" title="객체지향 캡슐화 그것이 알고 싶다.">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -286,7 +299,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">들어가며</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">객체 데이터 중심은 객체의 행동보다는 상태에 초점을 맞추게되어 캡슐화 위반을 쉽게 하게 만든다.</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">데이터 중심보단 책임(행동) 중심으로 객체를 설계해야 하는 이유</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">데이터 중심 설계로인한 결합도가 높아진 케이스</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">왜 OOP를 할 때 데이터 중심으로 하면 안될까??</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">데이터 중심 객체 설게 문제점 1 - 캡슐화 위반</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">데이터 중심 객체 설게 문제점 2 - 높은 결합도</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">데이터 중심 객체 설게 문제점 3 - 낮은 응집도</span></a></li></ol>
         
         </div>
       </aside>

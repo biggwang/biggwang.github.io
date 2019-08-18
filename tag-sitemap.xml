@@ -79,22 +79,22 @@
     </url>
 
     <url>
+        <loc>https://biggwang.github.io/tags/%ED%9A%8C%EA%B3%A0/</loc>
+        <lastmod>2019-08-14T15:28:33.855Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://biggwang.github.io/tags/OOP/</loc>
-        <lastmod>2019-08-03T22:52:37.326Z</lastmod>
+        <lastmod>2019-08-18T00:03:58.810Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://biggwang.github.io/tags/Book/</loc>
-        <lastmod>2019-08-03T22:52:37.326Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://biggwang.github.io/tags/%ED%9A%8C%EA%B3%A0/</loc>
-        <lastmod>2019-08-14T15:28:33.855Z</lastmod>
+        <lastmod>2019-08-18T00:03:58.810Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
