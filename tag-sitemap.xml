@@ -93,8 +93,15 @@
     </url>
 
     <url>
-        <loc>https://biggwang.github.io/tags/Component/</loc>
-        <lastmod>2022-10-23T09:58:11.384Z</lastmod>
+        <loc>https://biggwang.github.io/tags/%EC%98%88%EC%A0%9C%EC%8B%A4%EC%8A%B5/</loc>
+        <lastmod>2022-10-23T10:12:12.532Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://biggwang.github.io/tags/%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/</loc>
+        <lastmod>2022-10-23T10:12:12.532Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

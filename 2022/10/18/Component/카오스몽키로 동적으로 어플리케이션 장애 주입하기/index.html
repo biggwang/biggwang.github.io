@@ -18,7 +18,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          카오스몽키로 동적으로 어플리케이션 장애 주입하기 - 백문이불여일타
+          카오스몽키로 런타임환경에서 어플리케이션 장애 주입하기 - 백문이불여일타
         
     </title>
 
@@ -96,10 +96,12 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Component" title="Component">Component</a>
+                              <a class="tag" href="/tags/#예제실습" title="예제실습">예제실습</a>
+                            
+                              <a class="tag" href="/tags/#라이브러리" title="라이브러리">라이브러리</a>
                             
                         </div>
-                        <h1>카오스몽키로 동적으로 어플리케이션 장애 주입하기</h1>
+                        <h1>카오스몽키로 런타임환경에서 어플리케이션 장애 주입하기</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Yungwang Ryu on
@@ -221,12 +223,12 @@
                 post-container">
 
                 <h3><span id="배경">배경</span></h3>
-<p>“특정 엔드포인트 오류 났을때 화면을 보고 싶은데 어떻게 해요?”<br>
+<p>“송금 API 오류 났을때 화면을 보고 싶은데 어떻게 해요?”<br>
 “타임아웃 났을때 서비스가 어떻게 되는지 보고 싶은데 어떻게 해요?”</p>
 <p>이런 요구사항을 받았을때, 생각나는건 특정 파라미터 하드코딩하여 if문을 추가하거나<br>
-phase 환경이 개발용 운영용 클래스를 분리하는 방법으로 했다.</p>
-<p>이러한 방식은 나이스하지 않다고 생각했고 이때 스치듯 카오스몽키가 생각이 났다.<br>
-이참에 사용 방법을 <a href="https://github.com/biggwang/chaos-monkey" rel="external nofollow noopener noreferrer" target="_blank">예제</a>를 통해서 정리해보고 실무에 적용하여 하드코딩하지 않고 런타임 환경에서 장애를 주입하여 유연한 테스트 및 장애 대응 훈련을 대비해 보도록 해보자</p>
+prfofile 환경이 개발용 운영용 클래스를 분리하는 방법으로 했었다.</p>
+<p>이러한 방식은 코드를 직접건들기에 나이스하지 않다고 생각했고 이때 스치듯 카오스몽키가 생각이 났다.</p>
+<p>이참에 사용 방법을 <a href="https://github.com/biggwang/chaos-monkey" rel="external nofollow noopener noreferrer" target="_blank">예제</a>를 통해서 정리해보고 실무에 적용하여 하드코딩하지 않고 런타임 환경에서 장애를 주입하여 유연한 테스트 및 장애 대응 훈련을 대비해 보도록 해보자</p>
 <h3><span id="카오스몽키">카오스몽키</span></h3>
 <p>카오스몽키란 넷플릭스에서 만든 장애주입이 가능한 오픈소스 라이브러이다.<br>
 넷플릭스에서 AWS상 마이크로서비스에 대해 장애를 주입시킴으로써 대응 훈련하기 위해 만들어 졌다고한다. 이밖에도 region, zone 레벨에 장애주입이 가능한 카오스콩, 카오스고릴라도 있다.</p>
@@ -242,12 +244,14 @@ yml로 설정 하면 설정값이 바뀔때 마다 서버 재시작이 필요하
 <h3><span id="카오스몽키-적용-하기-feat-cm4sb">카오스몽키 적용 하기 (feat: CM4SB)</span></h3>
 <p>스프링부트에 적용하는 방법은 매우 간단하다.<br>
 <a href="https://codecentric.github.io/chaos-monkey-spring-boot/latest/#_adding_chaos_monkey_for_spring_boot" rel="external nofollow noopener noreferrer" target="_blank">문서</a>에 나온것 처럼 라이브러리 의존을 추가하고 yml profile에 chaos-monkey를 추가하고 서버를 올리면 카오스몽키로고가 보이면 성공이다.</p>
-<h3><span id="카오스몽키-api로-설정-팁">카오스몽키 api로 설정 팁</span></h3>
+<h3><span id="카오스몽키-api로-장애-주입-설정-팁">카오스몽키 API로 장애 주입 설정 팁</span></h3>
 <p>설정하다보면 watchers로 resctController, componet 등 여러 빈들을 설정 할 수가 있다.<br>
 만약 restController, component 설정하고 지연은 3s로 했다면 모든 watchers마다 3초씩 지연이 발생한다. 따라서 내가 지연을 주고 싶은 메소드 또는 클래스에만 watcher로 걸어 줘야 한다.</p>
 <h3><span id="시나리오-restcontroller만-요청-마다-2s-~-5s-지연-시키기">시나리오: RestController만 요청 마다 2s ~ 5s 지연 시키기</span></h3>
-<p>자 이제 본격적으로 카오스몽키에서 제공하는 API로 본격적으로 장애 설정 및 트리거를 걸어보자.<br>
-level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되고 level=3으로 하게 되면 3번중 1번꼴로 지연이 발생 된다. 확인 할 때 watchedCustomService 설정이 되어 있으면 RestController 이더라도 지연이 되지 않으니 설정을 먼저 초기화 한 후에 진행해야 한다.</p>
+<p>자 이제 본격적으로 카오스몽키에서 제공하는 API로 장애 설정 및 트리거를 걸어보자.<br>
+level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되고<br>
+level = 3으로 하게 되면 3번중 1번꼴로 지연이 발생 된다.<br>
+확인 할 때 watchedCustomService 설정이 되어 있으면 RestController 이더라도 지연이 되지 않으니 설정을 먼저 초기화 한 후에 진행해야 한다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 공격 설정 및 와쳐 확인</span></span><br><span class="line">http localhost:<span class="number">8080</span>/actuator/chaosmonkey</span><br><span class="line"></span><br><span class="line"><span class="comment">// 설저 초기화</span></span><br><span class="line">http post localhost:<span class="number">8080</span>/actuator/chaosmonkey/watchers rest_controller=<span class="keyword">true</span> component=<span class="keyword">false</span> watched_custom_services:=<span class="string">"[]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 공격 주입</span></span><br><span class="line">http POST localhost:<span class="number">8080</span>/actuator/chaosmonkey/assaults level=<span class="number">1</span> latencyRangeStart=<span class="number">2000</span> latencyRangeEnd=<span class="number">5000</span> latencyActive=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 엔드포인 확인</span></span><br><span class="line">http post localhost:<span class="number">8080</span>/send receiverName=<span class="string">"루피"</span> amount=<span class="number">100</span></span><br></pre></td></tr></table></figure>
 <img src="/2022/10/18/Component/카오스몽키로%20동적으로%20어플리케이션%20장애%20주입하기/jmeter-1.png">
 <p>jmeter로 실행결과 level=3 설정시 약 3번 요청당 1번꼴로 랜덤하게 지연이 발생하고 있는데, 랜덤하게 라고 말한이유는 무조건 3번째 요청일때 지연이 발생하는것은 아니기 때문이다.</p>
@@ -265,11 +269,18 @@ level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되
 <p>POST 요청시 body를 읽기 위해 inputStream을 가져와야 하는데 이미 스프링컨테이너가 body를 객체에 맵핑하기 위해 한번 getInputStream을 하였기 때문에 body값이 항상 empty로 나오게 된다.</p>
 <p>따라서 한번 읽어온 body 값을 wrapper로 감싸서 보관하여 필터 등록을 해야 하는데 자세한 내용은 <a href="https://github.com/biggwang/chaos-monkey" rel="external nofollow noopener noreferrer" target="_blank">예제</a>를 참고 하거나 구글링을 통해서 구현하면 된다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChaosTriggerCondition</span> <span class="keyword">implements</span> <span class="title">ChaosToggles</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">(String toggleName)</span> </span>&#123;</span><br><span class="line">        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();</span><br><span class="line">        <span class="keyword">return</span> isTrigger(request); <span class="comment">// 트리거 되는 조건을 넣어 주면 된다.</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 구성하면 watcher로 걸려 있더라도 특정 파라미터가 아니라면 카오스몽키가 동작하지 않게 된다!</p>
 <h3><span id="시나리오-특정-엔드포인트에-특정-exception-발생시키기">시나리오: 특정 엔드포인트에 특정 Exception 발생시키기</span></h3>
 <p>특정 서비스에 특정 exception을 발생 시킬수도 있다.<br>
 어떤 exception 발생 되냐에 따라 사용자에게 보여지는 에러페이지나 로직이 달라질수 있기 때문에 이 기능도 유용하다.<br>
 라이브러리에서 제공하는 exception도 가능하고 내가 custom하게 만든 unchecked exception도 가능하다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http post localhost:<span class="number">8080</span>/actuator/chaosmonkey/watchers restController=<span class="keyword">false</span> component=<span class="keyword">true</span></span><br><span class="line">http post localhost:<span class="number">8080</span>/actuator/chaosmonkey/assaults \</span><br><span class="line">    exceptionsActive=<span class="keyword">true</span> \</span><br><span class="line">    level=<span class="number">1</span> \</span><br><span class="line">    exception:=<span class="string">'&#123;"type":"org.springframework.web.client.RestClientException"&#125;'</span> \</span><br><span class="line">    watchedCustomServices:=<span class="string">'["com.chaos.monkey.SimpleApiAdapter"]'</span></span><br><span class="line">http post localhost:<span class="number">8080</span>/send receiverName=<span class="string">"루피"</span> amount=<span class="number">100</span></span><br></pre></td></tr></table></figure>
+<h3><span id="시나리오-outbouund로-나가는-api-클라이언트로-timeout-발생시키기">시나리오: outbouund로 나가는 API 클라이언트로 Timeout 발생시키기</span></h3>
+<p>외부 API 요청을 통해서 로직을 수행하는 경우도 있다.<br>
+이때 외부 API가 타임아웃 발생했을 때 대응해야 경우도있다. retry를 할것인지 후처리를 할것인지 말이다. 이때도 카오스몽키를 사용하면 유용하게 된다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http post localhost:<span class="number">8080</span>/actuator/chaosmonkey/watchers restTemplate=<span class="keyword">true</span></span><br><span class="line">http POST localhost:<span class="number">8080</span>/actuator/chaosmonkey/assaults level=<span class="number">1</span> latencyRangeStart=<span class="number">2000</span> latencyRangeEnd=<span class="number">5000</span> latencyActive=<span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>설정은 이렇게 하면 되고 참고로 카오스몽키에서 제공하고 있는 http client 외 것들은 적용이 되지 않는다.<br>
+예로 retrofit… 이럴때는 그냥 TimeoutException을 강제로 발생시켜 확인을 해야 한다.</p>
 <h3><span id="더나아가서-특정-파라미터는-어디서-설정-할까">더나아가서: 특정 파라미터는 어디서 설정 할까?</span></h3>
 <p>이렇게 케이스별로 카오스몽키 예제를 연습해 보았다.<br>
 실무에서 가장 사용할만한 케이스는 특정 파라미터에 특정 엔드포인트를 지연시키는 케이스 정도 될거 같은데 그럼 특정 파라미터에 대한 CRUD는 어디서 할까? 서버에 저장하면 될까? 안된다<br>
@@ -280,7 +291,7 @@ level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되
 <p>또한 QA 할 때도 스웨거로 공유하면 QA 할때도 요긴하게 사용 할 수 있다.<br>
 물론 개발서버에서만 우선 하는게 안전하다.</p>
 <h3><span id="애플리케이션-보안">애플리케이션 보안</span></h3>
-<p>기본적으로 카오스몽키 활성화 설정은 disabled 해놓자 얼마든지 api로 설정을 핸들링 할 수 있으니 필요 할 때 설정 하는걸로… 또한 phase 구성을 개발서버에서만 동작 하도록 하고 카오스몽키 액츄에이터 엔드포인트도 노출되서는 안된다.</p>
+<p>기본적으로 카오스몽키 활성화 설정은 disabled 해놓자 얼마든지 API로 설정을 핸들링 할 수 있으니 필요 할 때 설정 하면 되기 때문이다. 또한 profile 구성을 개발서버에서만 동작 하도록 하고 카오스몽키 액츄에이터 엔드포인트도 노출되서는 안되게 해야 한다.</p>
 
                 
 
@@ -320,7 +331,7 @@ level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">배경</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">카오스몽키</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">카오스몽키 동작 방식</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">사전 준비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">카오스몽키 적용 하기 (feat: CM4SB)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">카오스몽키 api로 설정 팁</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">시나리오: RestController만 요청 마다 2s ~ 5s 지연 시키기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">시나리오: 특정 메소드에만 적용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">시나리오: 특정 엔드포인트에 특정 파라미터인 경우 레이턴시 적용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">시나리오: 특정 엔드포인트에 특정 Exception 발생시키기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">더나아가서: 특정 파라미터는 어디서 설정 할까?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">애플리케이션 보안</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">배경</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">카오스몽키</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">카오스몽키 동작 방식</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">사전 준비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">카오스몽키 적용 하기 (feat: CM4SB)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">카오스몽키 API로 장애 주입 설정 팁</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">시나리오: RestController만 요청 마다 2s ~ 5s 지연 시키기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">시나리오: 특정 메소드에만 적용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">시나리오: 특정 엔드포인트에 특정 파라미터인 경우 레이턴시 적용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">시나리오: 특정 엔드포인트에 특정 Exception 발생시키기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">시나리오: outbouund로 나가는 API 클라이언트로 Timeout 발생시키기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">더나아가서: 특정 파라미터는 어디서 설정 할까?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">애플리케이션 보안</span></a></li></ol>
         
         </div>
       </aside>
@@ -340,7 +351,9 @@ level = 1로 설정 하게 되면 요청할때 마다 지연이 발생하게 되
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Component" title="Component">Component</a>
+                          <a class="tag" href="/tags/#예제실습" title="예제실습">예제실습</a>
+                        
+                          <a class="tag" href="/tags/#라이브러리" title="라이브러리">라이브러리</a>
                         
                     </div>
                 </section>
